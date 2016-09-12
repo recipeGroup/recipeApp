@@ -7,7 +7,7 @@
         controller: loginController,
         controllerAs: 'vm'
       });
-    function loginController(authenticationService) {
+    function loginController(authenticationService, toastService) {
 
       var vm = this;
       vm.$onInit = onInit;

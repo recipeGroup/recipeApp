@@ -31,6 +31,7 @@
             promise.resolve("Profile Created");
           })
           .catch(function (creationError) {
+            console.log(creationError);
             promise.reject(creationError)
           });
 
@@ -64,6 +65,7 @@
               promise.resolve(loginSuccess);
             })
             .catch(function (loginError) {
+              console.log(loginError);
               promise.reject(loginError);
             })
 
