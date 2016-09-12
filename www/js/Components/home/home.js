@@ -3,11 +3,11 @@
     .component(
       'home',{
         bindings: {},
-        templateUrl: 'js/home/home.html',
+        templateUrl: 'js/Components/home/home.html',
         controller: homeController,
         controllerAs: 'vm'
       });
     function homeController() {
-      
+
     }
   })();
