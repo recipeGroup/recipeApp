@@ -18,20 +18,20 @@
           .then(function (firebaseUser) {
             var ref = firebase.database().ref("users");
             var profileRef = ref.child(firebaseUser.uid);
-            var user = $firebaseObject(profileRef);
+            var theUser = $firebaseObject(profileRef);
+            var userStorage = window.localStorage.getItem('firebase:authUser:AIzaSyDtNbp-weG3kHrkLuhl6f9Ymy5JMQ0F8W8:[DEFAULT]');
+            user = JSON.parse(userStorage);
 
-            user.$loaded().then(
+            theUser.$loaded().then(
               profileRef.set({
                 displayName: firebaseUser.displayName,
                 email: firebaseUser.email,
                 photoURL: firebaseUser.photoURL
               })
             );
-
-            promise.resolve("Profile Created");
+            promise.resolve(user);
           })
           .catch(function (creationError) {
-            console.log(creationError);
             promise.reject(creationError)
           });
 
@@ -62,10 +62,11 @@
 
           auth.$signInWithEmailAndPassword(email, password)
             .then(function (loginSuccess) {
-              promise.resolve(loginSuccess);
+              var userStorage = window.localStorage.getItem('firebase:authUser:AIzaSyDtNbp-weG3kHrkLuhl6f9Ymy5JMQ0F8W8:[DEFAULT]');
+              user = JSON.parse(userStorage);
+              promise.resolve(user);
             })
             .catch(function (loginError) {
-              console.log(loginError);
               promise.reject(loginError);
             })
 
@@ -94,7 +95,6 @@
               );
               promise.resolve(user)
             }).catch(function (error) {
-
             promise.reject(error);
           });
 
