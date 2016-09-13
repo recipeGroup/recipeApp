@@ -7,7 +7,7 @@
         controller: loginController,
         controllerAs: 'vm'
       });
-    function loginController(authenticationService, toastService) {
+    function loginController(authenticationService, toastService, $state) {
 
       var vm = this;
       vm.$onInit = onInit;
@@ -32,6 +32,7 @@
               }else {
                 toastService.showToast(vm.user.email + " logged in!");
               }
+              $state.go('home');
             }, function (error) {
               toastService.showToast(error);
             });
@@ -52,6 +53,7 @@
               }else {
                 toastService.showToast(vm.user.email + " logged in!");
               }
+            $state.go('home');
             },
             function(error) {
               toastService.showToast(error)
