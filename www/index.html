@@ -25,17 +25,19 @@
   <script src="js/app.js"></script>
 </head>
 <body ng-app="app">
-<div class="tabs tabs-positive">
+<div ng-controller="indexController as vm " class="tabs tabs-positive">
   <a class="tab-item" ui-sref="home">HOME</a>
-  <a class="tab-item" ui-sref="login">LOGIN</a>
   <a class="tab-item">BOO</a>
+  <a class="tab-item" ui-sref="login"><span ng-show="vm.user === undefined">LOGIN</span><span ng-show="vm.user !== undefined">LOGOUT</span></a>
 </div>
+
 <ion-nav-view>
 
 </ion-nav-view>
 
 <!-- Firebase Config-->
 <script src="js/config.js"></script>
+<script src="js/Controllers/indexController.js"></script>
 
 <!-- Services-->
 <script src="js/Services/authentication.js"></script>

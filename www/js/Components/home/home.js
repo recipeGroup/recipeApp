@@ -7,7 +7,13 @@
         controller: homeController,
         controllerAs: 'vm'
       });
-    function homeController() {
+    function homeController(authenticationService) {
+      var vm = this;
+      vm.$onInit = onInit;
+
+      function onInit() {
+        vm.user = authenticationService.initialCheck()
+      }
 
     }
   })();

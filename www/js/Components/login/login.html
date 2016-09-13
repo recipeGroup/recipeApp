@@ -1,13 +1,12 @@
 <ion-pane>
-  <ion-header-bar class="bar-positive" align-title="center">
-    <h1 class="title">Login Page</h1>
+  <ion-header-bar class="bar bar-header bar-positive" align-title="center">
+    <h1 class="title">Login</h1>
   </ion-header-bar>
-  <ion-content>
-    <div id="loginComponent">
+    <ion-content id="loginComponent">
       <div class='loginDiv' ng-if="!vm.user">
-        <button class="button button-positive button-block" ng-click="vm.login('facebook')">Login with Facebook</button>
-        <button class="button button-positive button-block" ng-click="vm.login('google')">Login with Google</button>
-        <button class="button button-positive button-block" ng-click="vm.showEmailForm()">Login with Email</button>
+        <button class="button button-positive button-block" on-tap="vm.login('facebook')">Login with Facebook</button>
+        <button class="button button-positive button-block" on-tap="vm.login('google')">Login with Google</button>
+        <button class="button button-positive button-block" on-tap="vm.showEmailForm()">Login with Email</button>
       </div>
 
       <form class="emailForm" name="emailForm" ng-submit="vm.login('email', email, password)"
@@ -22,7 +21,7 @@
         </label>
 
         <button ng-disabled="$scope.emailForm.$invalid" class="button button-positive button-block" type="submit">Submit</button>
-        <p style="color: blue; cursor: pointer;" ng-click="vm.showCreateEmailForm()">Create a New Account?</p>
+        <p style="color: blue; cursor: pointer;" on-tap="vm.showCreateEmailForm()">Create a New Account?</p>
       </form>
 
       <form class="emailForm" name="createEmailForm"
@@ -44,8 +43,7 @@
       </form>
 
       <div class="loginDiv" ng-if="vm.user">
-        <button class="button button-positive button-block" ng-click="vm.logout()">Logout</button>
+        <button class="button button-positive button-block" on-tap="vm.logout()">Logout</button>
       </div>
-    </div>
-  </ion-content>
+    </ion-content>
 </ion-pane>

@@ -1,6 +1,6 @@
 (function () {
   angular.module('app')
-    .service('authenticationService', function ($sessionStorage, $localStorage, $firebaseObject, $firebaseAuth, $q) {
+    .service('authenticationService', function ($sessionStorage, $localStorage, $firebaseObject, $firebaseAuth, $q, $state) {
 
       var vm = this;
       vm.login = login;
@@ -44,10 +44,13 @@
         if (user) {
           return user;
         }
-        else {
+        else if (window.localStorage.getItem('firebase:authUser:AIzaSyDtNbp-weG3kHrkLuhl6f9Ymy5JMQ0F8W8:[DEFAULT]')) {
           var userStorage = window.localStorage.getItem('firebase:authUser:AIzaSyDtNbp-weG3kHrkLuhl6f9Ymy5JMQ0F8W8:[DEFAULT]');
           user = JSON.parse(userStorage);
           return user;
+        }
+        else {
+          $state.go("login")
         }
       }
 
@@ -107,6 +110,7 @@
         var auth = $firebaseAuth();
         auth.$signOut();
         user = undefined;
+        $state.go('login');
         return user;
       }
 
