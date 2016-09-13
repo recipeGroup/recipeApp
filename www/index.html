@@ -28,7 +28,7 @@
 <div ng-controller="indexController as vm " class="tabs tabs-positive">
   <a class="tab-item" ui-sref="home">HOME</a>
   <a class="tab-item">BOO</a>
-  <a class="tab-item" ui-sref="login"><span ng-show="vm.user === undefined">LOGIN</span><span ng-show="vm.user !== undefined">LOGOUT</span></a>
+  <a class="tab-item" ui-sref="login"><span ng-show="vm.user">LOGIN</span><span ng-show="!vm.user">LOGOUT</span></a>
 </div>
 
 <ion-nav-view>
@@ -40,12 +40,15 @@
 <script src="js/Controllers/indexController.js"></script>
 
 <!-- Services-->
+<script src="js/Services/firebase.js"></script>
 <script src="js/Services/authentication.js"></script>
 <script src="js/Services/toast.js"></script>
 
 <!-- Components-->
 <script src="js/Components/home/home.js"></script>
 <script src="js/Components/login/login.js"></script>
+<script src="js/Components/my-recipes/my-recipes.js"></script>
+<script src="js/Components/new-recipe/new-recipe.js"></script>
 
 </body>
 </html>
