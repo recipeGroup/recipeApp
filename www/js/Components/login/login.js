@@ -26,7 +26,12 @@
         else {
           authenticationService.createUserFromEmail(email, password1)
             .then(function (response) {
-              toastService.showToast(response);
+              vm.user = response;
+              if(vm.user.displayName) {
+                toastService.showToast(vm.user.displayName + " Logged In!");
+              }else {
+                toastService.showToast(vm.user.email + " logged in!");
+              }
             }, function (error) {
               toastService.showToast(error);
             });
@@ -41,8 +46,12 @@
 
         authenticationService.login(provider, email, password)
           .then(function (response) {
-              toastService.showToast(response.displayName + " Logged In!");
               vm.user = response;
+              if(vm.user.displayName) {
+                toastService.showToast(vm.user.displayName + " Logged In!");
+              }else {
+                toastService.showToast(vm.user.email + " logged in!");
+              }
             },
             function(error) {
               toastService.showToast(error)
@@ -51,7 +60,12 @@
 
       //This allows the user to Logout
       function logout() {
-        toastService.showToast(vm.user.displayName + " Logged Out!");
+        if(vm.user.displayName) {
+          toastService.showToast(vm.user.displayName + " logged out!");
+        }else {
+          toastService.showToast(vm.user.email + " logged out!");
+        }
+
         vm.user = authenticationService.logout();
       }
 
