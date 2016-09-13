@@ -1,3 +1,26 @@
+#homeComponent {
+  text-align: center;
+  margin-top: 2em;
+}
+
+
+
 #loginComponent {
   padding: .3em;
 }
+
+
+.noDecoration {
+  color: black;
+  text-decoration: none;
+}
+
+.noDecoration > i {
+  font-size: 15em;
+}
+
+.noDecoration > p {
+  font-size: 2em;
+}
+
+
