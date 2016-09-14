@@ -4,7 +4,7 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('app', ['ionic', 'firebase', 'ngStorage'])
   .config(function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/tabs');
+    $urlRouterProvider.otherwise('/tabs/login');
     $stateProvider
       .state('tabs', {
         url: '/tabs',

@@ -7,10 +7,11 @@
         controller: newRecipeController,
         controllerAs: 'vm'
       });
-  function newRecipeController(authenticationService, firebaseService) {
+  function newRecipeController(authenticationService, firebaseService, toastService) {
     var vm = this;
     vm.$onInit = onInit;
     vm.addIngredient = addIngredient;
+    vm.saveRecipe = saveRecipe;
     vm.recipe = {};
     vm.recipe.ingredients = [];
 
@@ -26,6 +27,14 @@
     function onInit() {
       vm.user = authenticationService.initialCheck()
     }
+
+    function saveRecipe(recipe) {
+      firebaseService.saveRecipe(recipe);
+      toastService.showToast(vm.recipe.title + ' created!');
+      vm.recipe = {};
+    }
+
+
 
   }
 })();
