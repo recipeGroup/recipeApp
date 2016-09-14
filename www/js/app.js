@@ -4,22 +4,26 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('app', ['ionic', 'firebase', 'ngStorage'])
   .config(function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('login');
+    $urlRouterProvider.otherwise('/tabs');
     $stateProvider
+      .state('tabs', {
+        url: '/tabs',
+        template: '<tabs></tabs>'
+      })
       .state(
-        'login', {
+        'tabs.login', {
           url: '/login',
           template: '<login></login>'
         })
-      .state('home', {
+      .state('tabs.home', {
         url: '/home',
         template: '<home></home>'
       })
-      .state('myRecipes', {
+      .state('tabs.myRecipes', {
         url: '/myRecipes',
         template: '<my-recipes></my-recipes>'
       })
-      .state('newRecipe', {
+      .state('tabs.newRecipe', {
         url: '/newRecipe',
         template: '<new-recipe></new-recipe>'
       })
