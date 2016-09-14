@@ -40,6 +40,7 @@
 
       //This does the initial Check for the user
       function initialCheck() {
+        console.log('reloaded');
         if (user) {
           return user;
         }
@@ -49,7 +50,7 @@
           return user;
         }
         else {
-          $state.go("login")
+          $state.go("tabs.login")
         }
       }
 
@@ -95,6 +96,7 @@
                   }
                 }
               );
+               $state.reload('tabs');
               promise.resolve(user)
             }).catch(function (error) {
             promise.reject(error);
@@ -109,7 +111,8 @@
         var auth = $firebaseAuth();
         auth.$signOut();
         user = undefined;
-        $state.go('login');
+        $state.go('tabs.login');
+          
         return user;
       }
 
