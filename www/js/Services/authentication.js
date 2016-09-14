@@ -2,10 +2,10 @@
   angular.module('app')
     .service('authenticationService', function ($sessionStorage, $localStorage, $firebaseObject, $firebaseAuth, $q, $state) {
 
-      vm.login = login;
-      vm.logout = logout;
-      vm.createUserFromEmail = createUserFromEmail;
-      vm.initialCheck = initialCheck;
+      this.login = login;
+      this.logout = logout;
+      this.createUserFromEmail = createUserFromEmail;
+      this.initialCheck = initialCheck;
       var user;
 
 
