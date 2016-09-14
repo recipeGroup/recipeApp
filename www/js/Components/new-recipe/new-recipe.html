@@ -5,9 +5,33 @@
   <ion-content id="homeComponent">
     <div>
       <a class="noDecoration">
-      <i class="icon ion-document"></i>
-      <p>Make New Recipe</p>
+        <i class="icon ion-document"></i>
+        <p>Make New Recipe</p>
       </a>
     </div>
+    <form name="newRecipeForm">
+      <label class="item item-input">
+        <span class="input-label">Title</span>
+        <input type="text" ng-model="recipe.title" placeholder="Chocolate Chip Cookies">
+      </label>
+      <div>
+        <label class="item item-input">
+          <span class="input-label">Ingredient</span>
+          <input type="text" ng-model="vm.ingredient" placeholder="Milk">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Quantity</span>
+          <input type="text" ng-model="vm.quantity" placeholder="1/2 Cup">
+        </label>
+      <button class="button button-full button-positive" on-tap="vm.addIngredient(vm.ingredient, vm.quantity)">Add ingredient</button>
+      </div>
+      <div ng-repeat="ingredient in vm.recipe.ingredients">
+        <span>{{$index + 1}}.</span><span ng-bind="ingredient.quantity"></span> of <span ng-bind='ingredient.name'></span>
+      </div>
+      <label class="item item-input">
+        <span class="input-label">Directions</span>
+        <textarea ng-model="recipe.directions" style="width: 14em; height: 5em;" placeholder="1. Get the Oven Hot"></textarea>
+      </label>
+    </form>
   </ion-content>
 </ion-pane>

@@ -40,7 +40,6 @@
 
       //This does the initial Check for the user
       function initialCheck() {
-        console.log('reloaded');
         if (user) {
           return user;
         }
