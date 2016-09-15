@@ -8,7 +8,7 @@
         controllerAs: 'vm'
       });
   function loginController(authenticationService, toastService, $state) {
-    
+
     var vm = this;
     vm.$onInit = onInit;
     vm.createEmailLogin = createEmailLogin;
@@ -16,8 +16,14 @@
     vm.logout = logout;
     vm.showCreateEmailForm = showCreateEmailForm;
     vm.showEmailForm = showEmailForm;
-    
-    //This allows the user to create an email Login
+
+    /**
+     * @loghen41 createEmailLogin() allows the user to establish a new login with an email and two passwords
+     * @loghen41 the actual creation of the login is handled through authentication.js which speaks to firebase
+     * @param email
+     * @param password1
+     * @param password2
+     */
     function createEmailLogin(email, password1, password2) {
       vm.showTheCreateEmailForm = false;
       if (password1 !== password2) {
@@ -41,17 +47,24 @@
                 })
           }, function (error) {
             toastService.showToast(error);
-            
+
           })
       }
     }
-    
-    //This allows the user to login to the databse
+
+    /**
+     * @loghen41 login() can allow the user to login via a provider (facebook, google, etc..) or via email and password
+     * @loghen41 the actual login process is handled by authentication.js
+     * @param provider
+     * @param email
+     * @param password
+     */
     function login(provider, email, password) {
+
       if (vm.showTheEmailForm) {
         vm.showTheEmailForm = false;
       }
-      
+
       authenticationService.login(provider, email, password)
         .then(function (response) {
             vm.user = response;
@@ -69,34 +82,42 @@
             toastService.showToast(error)
           })
     }
-    
-    //This allows the user to Logout
+
+    /**
+     * @loghen41 logout() does not require params, it is merely called and it will log the user out of the system
+     */
     function logout() {
       if (vm.user.displayName) {
         toastService.showToast(vm.user.displayName + " logged out!");
       } else {
         toastService.showToast(vm.user.email + " logged out!");
       }
-      
+
       vm.user = authenticationService.logout();
     }
-    
-    //This does the initial load to see if the user is logged in
+
+    /**
+     * @loghen41 onInit() is called once the controller is loaded, and calls authenticationService.initialCheck() to see if the user exists and route the page accordingly
+     */
     function onInit() {
       vm.user = authenticationService.initialCheck();
-      
+
     }
-    
-    //This shows the form for the individual to create an email account
+
+    /**
+     * @loghen41 showCreateEmailForm() shows the createEmailForm when called
+     */
     function showCreateEmailForm() {
       vm.showTheEmailForm = false;
       vm.showTheCreateEmailForm = true;
     }
-    
-    //This shows the form for the individual to login to an email account
+
+    /**
+     * @loghen41 showEmailForm() shows the emailForm when called
+     */
     function showEmailForm() {
       vm.showTheEmailForm = true;
     }
-    
+
   }
 })();

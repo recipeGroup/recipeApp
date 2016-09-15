@@ -1,14 +1,22 @@
 <ion-pane>
+  <!-- This is the header bar for the New-Recipes Page -->
   <ion-header-bar class="bar-positive" align-title="center">
     <h1 class="title">New Recipe</h1>
   </ion-header-bar>
+
   <ion-content id="homeComponent">
+    <!-- This is the new Recipes Form, where the user can input a new Recipe-->
+
+    <!-- All of the information gathered in the newRecipeForm is assigned as a property on the vm.recipe object, which is then submitted to be stored in firebase and refreshed-->
     <form name="newRecipeForm" >
+      <!-- Here the user provides a title for the recipe-->
       <label class="item item-input">
         <span class="input-label">Title</span>
         <input type="text" ng-model="vm.recipe.title" placeholder="Chocolate Chip Cookies">
       </label>
+
       <div>
+        <!-- This div is where the user can provide ingredients information one by one, which is then added to the vm.recipe.ingredients Array-->
         <label class="item item-input">
           <span class="input-label">Ingredient</span>
           <input type="text" ng-model="vm.ingredient" placeholder="Milk">
@@ -19,14 +27,21 @@
         </label>
       <button class="button button-full button-positive" on-tap="vm.addIngredient(vm.ingredient, vm.quantity)">Add ingredient</button>
       </div>
+
+      <!-- This Div does an ng-repeat through all of the ingredients to dispaly them to the user upon creation-->
       <div ng-repeat="ingredient in vm.recipe.ingredients">
         <span>{{$index + 1}}. </span><span ng-bind="ingredient.quantity"></span> of <span ng-bind='ingredient.name'></span>
       </div>
+
+      <!-- This label allows the user to define directions, which are simply one large string-->
       <label class="item item-input">
         <span class="input-label">Directions</span>
         <textarea ng-model="vm.recipe.directions" style="width: 14em; height: 5em;" placeholder="1. Get the Oven Hot"></textarea>
       </label>
+
+      <!-- This button Submits the vm.recipe object to firebase-->
       <button class="button button-full button-positive" on-tap="vm.saveRecipe(vm.recipe)">Save Recipe</button>
     </form>
+
   </ion-content>
 </ion-pane>
