@@ -25,18 +25,21 @@
           <span class="input-label">Quantity</span>
           <input type="text" ng-model="vm.quantity" placeholder="1/2 Cup">
         </label>
-      <button class="button button-full button-positive" on-tap="vm.addIngredient(vm.ingredient, vm.quantity)">Add ingredient</button>
+      <button class="button button-full button-positive"
+              on-tap="vm.addIngredient(vm.ingredient, vm.quantity)">Add ingredient</button>
       </div>
 
       <!-- This Div does an ng-repeat through all of the ingredients to dispaly them to the user upon creation-->
       <div ng-repeat="ingredient in vm.recipe.ingredients">
-        <span>{{$index + 1}}. </span><span ng-bind="ingredient.quantity"></span> of <span ng-bind='ingredient.name'></span>
+        <span>{{$index + 1}}. </span>
+        <span ng-bind="ingredient.quantity"></span> of <span ng-bind='ingredient.name'></span>
       </div>
 
       <!-- This label allows the user to define directions, which are simply one large string-->
       <label class="item item-input">
         <span class="input-label">Directions</span>
-        <textarea ng-model="vm.recipe.directions" style="width: 14em; height: 5em;" placeholder="1. Get the Oven Hot"></textarea>
+        <textarea ng-model="vm.recipe.directions" style="width: 14em; height: 5em;"
+                  placeholder="1. Get the Oven Hot"></textarea>
       </label>
 
       <!-- This button Submits the vm.recipe object to firebase-->

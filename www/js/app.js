@@ -28,6 +28,11 @@
             url: '/login',
             template: '<login></login>'
           })
+        .state(
+          'tabs.recipeDetail', {
+            url: '/recipeDetail',
+            template: '<recipe-detail></recipe-detail>'
+          })
         .state('tabs.home', {
           url: '/home',
           template: '<home></home>'
