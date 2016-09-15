@@ -7,7 +7,7 @@
         controller: newRecipeController,
         controllerAs: 'vm'
       });
-  function newRecipeController(authenticationService, firebaseService, toastService) {
+  function newRecipeController(authenticationService, recipesService, toastService) {
     
     //Declaring variables to be used by this controller
     var vm = this;
@@ -47,13 +47,13 @@
 
     /**
      * @loghen41 this function requires a recipe to be passed to it, it assumes it will be the vm.recipe object we have been creating to this point
-     * @loghen41 the object is then passed to the firebase.js controller, where it saves the recipe on the database
+     * @loghen41 the object is then passed to the recipes.js controller, where it saves the recipe on the database
      * @param recipe
        */
     function saveRecipe(recipe) {
       
-      //we pass the recipe object to the firebaseService to store the recipe on the database
-      firebaseService.saveRecipe(vm.user, recipe);
+      //we pass the recipe object to the recipesService to store the recipe on the database
+      recipesService.saveRecipe(vm.user, recipe);
       
       //We show a toast to the user that displays that the recipe has been created
       toastService.showToast(vm.recipe.title + ' created!');

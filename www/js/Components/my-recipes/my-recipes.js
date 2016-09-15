@@ -7,7 +7,7 @@
         controller: myRecipesController,
         controllerAs: 'vm'
       });
-    function myRecipesController(authenticationService, firebaseService) {
+    function myRecipesController(authenticationService, $state, recipesService) {
 
       //Declaring Variables for the controller to user
       var vm = this;
@@ -15,6 +15,7 @@
       //Tying these functions for the view to have access to use
       vm.$onInit = onInit;
       vm.getRecipes = getRecipes;
+      vm.goToThisRecipe = goToThisRecipe;
 
       function onInit() {
         vm.user = authenticationService.initialCheck();
@@ -22,7 +23,7 @@
       }
 
       function getRecipes() {
-        firebaseService.getRecipes()
+        recipesService.getRecipes()
           .then(function(successResponse) {
             vm.recipes = successResponse;
           },
@@ -30,6 +31,12 @@
             console.log(errorResponse);
           });
       }
-
+  
+      function goToThisRecipe(recipe) {
+        recipesService.setSelectedRecipe(recipe);
+        $state.go('tabs.recipeDetail');
+      }
     }
+    
+    
   })();
