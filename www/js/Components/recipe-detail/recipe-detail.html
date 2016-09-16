@@ -3,6 +3,22 @@
     <h1 class="title">Recipe Details</h1>
   </ion-header-bar>
   <ion-content id="recipeDetailComponent">
-  <div>{{ vm.selectedRecipe }}</div>
+    <!-- Day 5, Fri- added card to hold tile and ingredients-->
+    <div class="card" ng-show="!vm.editing">
+      <!-- Day 5, Fri- this button shows edit div -->
+      <button class="button icon-left ion-edit button-energized" on-tap="vm.editing=!vm.editing"></button>
+
+      <div class="item item-text-wrap" style="font-weight:bold; font-size:x-large" align="center">{{ vm.selectedRecipe.title }}       </div>
+      <div class="item item-text-wrap" ng-repeat="ingredient in vm.selectedRecipe.ingredients">{{ ingredient.quantity }}of {{ ingredient.name }} </div>
+      <div class="item item-text-wrap"> {{ vm.selectedRecipe.directions }}</div>
+    </div>
+
+    <div class="card" ng-show="vm.editing">
+      <input class="item item-text-wrap" ng-model="vm.selectedRecipe.title">
+      <input class="item item-text-wrap" ng-repeat="ingredient in vm.selectedRecipe.ingredients">{{ ingredient.quantity }} of {{ingredient.name }} </input>
+      <input class="item item-text-wrap" > {{vm.selectedRecipe.directions}}</input>
+      <br>
+      <button class="button button-full button-positive" on-tap="vm.saveRecipe(vm.recipe)">Save Recipe</button>
+    </div>
   </ion-content>
 </ion-pane>

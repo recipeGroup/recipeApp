@@ -28,6 +28,9 @@
             url: '/login',
             template: '<login></login>'
           })
+        /**
+         *@kazeki1 Day 4, Thu- added this state to show recipe-detail page from my-recipes page
+         */
         .state(
           'tabs.recipeDetail', {
             url: '/recipeDetail',
