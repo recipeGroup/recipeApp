@@ -31,7 +31,8 @@
         var record = {
           title: recipe.title,
             ingredients: recipe.ingredients,
-            directions: recipe.directions
+            directions: recipe.directions,
+            public: true
         };
         record[user.uid] = true;
         recipesRef.$add(record);
