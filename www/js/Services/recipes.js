@@ -6,8 +6,9 @@
       var ref = firebase.database().ref("recipes");
       var recipesRef = $firebaseArray(ref);
       var selectedRecipe;
-      
+
       //Declaring functions for use in the Controller
+      this.editRecipe = editRecipe;
       this.saveRecipe = saveRecipe;
       this.getRecipes = getRecipes;
       this.setSelectedRecipe = setSelectedRecipe;
@@ -16,23 +17,34 @@
       function setSelectedRecipe(recipe) {
           selectedRecipe = recipe;
       }
-      
+
       function getSelectedRecipe() {
                return selectedRecipe;
       }
-      
+
       /**
        * @loghen41 saveRecipe() expects a user object and a recipe object, which should have a title, ingredients, and directions
        * @param user
        * @param recipe
        */
       function saveRecipe(user, recipe) {
-        recipesRef.$add({
-          user: user.uid,
+        var record = {
+          title: recipe.title,
+            ingredients: recipe.ingredients,
+            directions: recipe.directions
+        };
+        record[user.uid] = true;
+        recipesRef.$add(record);
+      }
+
+      function editRecipe(user, recipe) {
+        var record = {
           title: recipe.title,
           ingredients: recipe.ingredients,
           directions: recipe.directions
-        });
+        };
+        record[user.uid] = true;
+        recipesRef.$add(record);
       }
 
       function getRecipes () {
@@ -43,7 +55,7 @@
           function(errorResponse) {
             promise.reject(errorResponse);
           });
-        
+
         return promise.promise;
       }
 
