@@ -39,13 +39,14 @@
       }
 
       function editRecipe(user, recipe) {
+        console.log(recipe);
         var record = {
           title: recipe.title,
           ingredients: recipe.ingredients,
           directions: recipe.directions
         };
         record[user.uid] = true;
-        recipesRef.$add(record);
+        ref.child(recipe.$id).set(record);
       }
 
       function getRecipes () {
