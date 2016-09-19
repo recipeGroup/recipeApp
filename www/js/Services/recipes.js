@@ -49,18 +49,13 @@
       }
 
       function editRecipe(user, recipe) {
-        console.log(recipe);
         var record = {
           title: recipe.title,
+          ingredients:recipe.ingredients,
           directions: recipe.directions
         };
         record[user.uid] = true;
         ref.child(recipe.$id).set(record);
-        var newRef = firebase.database().ref("recipes").child(recipe.$id).child('ingredients');
-        var ingredientsRef = $firebaseArray(newRef);
-        for (var i = 0; i < recipe.ingredients.length; i++) {
-          ingredientsRef.$add(recipe.ingredients[i]);
-        }
       }
 
       function getRecipes () {
