@@ -26,13 +26,12 @@
         <input type="text" ng-model= vm.selectedRecipe.title>
       </label>
       <div ng-repeat="ingredient in vm.selectedRecipe.ingredients">
+        <button class="button button-small icon-left ion-trash-a button-assertive" on-tap="deleteLine()"></button>
         <label class="item item-input">
-          <button class="button button-small icon-left ion-trash-a button-assertive"></button>
           <span class="input-label">Ingredient</span>
           <input type="text" ng-model=ingredient.name>
         </label>
         <label class="item item-input">
-          <button class="button button-small icon-left ion-trash-a button-assertive"></button>
           <span class="input-label">Quantity</span>
           <input type="text" ng-model=ingredient.quantity>
         </label>
