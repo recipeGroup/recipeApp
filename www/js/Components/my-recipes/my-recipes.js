@@ -26,12 +26,12 @@
         /**
          * @kazeki1 Day 4, Thu - if authentication passes call getRecipes
          */
-        getRecipes();
+        getRecipes(vm.user.uid);
       }
 
-      function getRecipes() {
+      function getRecipes(userId) {
 
-        recipesService.getRecipes()
+        recipesService.getRecipes(userId)
           .then(function(successResponse) {
             vm.recipes = successResponse;
           },
