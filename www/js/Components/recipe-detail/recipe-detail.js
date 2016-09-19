@@ -15,6 +15,7 @@
     vm.$onInit = onInit;
     vm.saveRecipe = saveRecipe;
     vm.goBack = goBack;
+    vm.deleteLine = deleteLine;
 
     /**
      * @kazeki1 create the onLoad event in authenticationService and added it to initial check
@@ -34,6 +35,11 @@
 
     function goBack() {
       vm.selectedRecipe = undefined;
+    }
+
+    function deleteLine() {
+      
+
     }
 
   }
