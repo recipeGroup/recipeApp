@@ -8,9 +8,13 @@
       <!-- Day 5, Fri- this button shows edit div -->
       <button class="button icon-left ion-edit button-energized" on-tap="vm.editing=!vm.editing"></button>
 
+
       <div class="item item-text-wrap" style="font-weight:bold; font-size:x-large" align="center">{{ vm.selectedRecipe.title }}       </div>
-      <div class="item item-text-wrap" ng-repeat="ingredient in vm.selectedRecipe.ingredients">{{ ingredient.quantity }}of {{ ingredient.name }} </div>
+      <div class="item item-text-wrap" ng-repeat="ingredient in vm.selectedRecipe.ingredients">{{ ingredient.quantity }}of {{ ingredient.name }}
+        <button class="button button-small icon-left ion-trash-a button-assertive"></button>
+      </div>
       <div class="item item-text-wrap"> {{ vm.selectedRecipe.directions }}</div>
+
     </div>
 
     <div class="card" ng-show="vm.editing">
