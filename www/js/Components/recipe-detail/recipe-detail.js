@@ -2,15 +2,13 @@
   angular.module('app')
     .component(
       'recipeDetail', {
-        bindings: {
-          selectedRecipe : '='
-        },
+        bindings: {},
         templateUrl: 'js/Components/recipe-detail/recipe-detail.html',
         controller: recipeDetailController,
         controllerAs: 'vm'
       });
   //to connect to database and draw in selected recipe added authenticationService and recipesService
-  function recipeDetailController(authenticationService, recipesService) {
+  function recipeDetailController(authenticationService, recipesService, $state) {
     var vm = this;
     vm.$onInit = onInit;
     vm.saveRecipe = saveRecipe;
@@ -22,11 +20,11 @@
      * @kazeki1 created the variable selectedRecipe and set it equal to the SelectedRecipe
      */
     function onInit() {
-      //vm.user = authenticationService.initialCheck();
+      vm.user = authenticationService.initialCheck();
       /**
        * @kazeki1 Day 4, Thu- load selectedRecipe with selected recipe held in recipesService
        */
-      //vm.selectedRecipe = recipesService.getSelectedRecipe();
+      vm.selectedRecipe = recipesService.getSelectedRecipe();
     }
 
      function saveRecipe(recipe) {
@@ -34,7 +32,7 @@
      }
 
     function goBack() {
-      vm.selectedRecipe = undefined;
+      $state.go('tabs.myRecipes');
     }
 
     function deleteLine() {
