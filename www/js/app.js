@@ -6,22 +6,24 @@
       'ionic',
       'firebase',
       'ngStorage'])
-    
+
 //This is the configuaration for the entire 'app' module
-    .config(function ($stateProvider, $urlRouterProvider) {
-      
+    .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+
+      $ionicConfigProvider.views.maxCache(0);
+
       //$urlRouterProvider sets up the default splash page for the app once it is loaded
       $urlRouterProvider.otherwise('/tabs/login');
-      
+
       //$stateProvider sets up all of the potential states for the app to run in
       $stateProvider
-        
+
       //The tabs state is the parent state for the app, it is displayed in the ion-nav-view in the index
         .state('tabs', {
           url: '/tabs',
           template: '<tabs></tabs>'
         })
-        
+
         //The following states are children to the tabs state, they can only be viewed through the ion-nav-view located in the tabs component
         .state(
           'tabs.login', {
@@ -49,7 +51,7 @@
           template: '<new-recipe></new-recipe>'
         })
     })
-    
+
     //this is the run state for ionic, it is what makes the actual native application for mobile devices
     .run(function ($ionicPlatform) {
       $ionicPlatform.ready(function () {
@@ -68,6 +70,6 @@
         }
       });
     });
-  
-  
+
+
 })();
