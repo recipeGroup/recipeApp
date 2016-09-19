@@ -14,7 +14,7 @@
       </div>
       <div class="item item-text-wrap" ng-repeat="ingredient in vm.selectedRecipe.ingredients">{{ ingredient.quantity
         }}of {{ ingredient.name }}
-        <button class="button button-small icon-left ion-trash-a button-assertive"></button>
+
       </div>
       <div class="item item-text-wrap"> {{ vm.selectedRecipe.directions }}</div>
 
@@ -27,10 +27,12 @@
       </label>
       <div ng-repeat="ingredient in vm.selectedRecipe.ingredients">
         <label class="item item-input">
+          <button class="button button-small icon-left ion-trash-a button-assertive"></button>
           <span class="input-label">Ingredient</span>
           <input type="text" ng-model=ingredient.name>
         </label>
         <label class="item item-input">
+          <button class="button button-small icon-left ion-trash-a button-assertive"></button>
           <span class="input-label">Quantity</span>
           <input type="text" ng-model=ingredient.quantity>
         </label>
