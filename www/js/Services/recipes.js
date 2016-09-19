@@ -15,11 +15,11 @@
       this.getSelectedRecipe = getSelectedRecipe;
 
       function setSelectedRecipe(recipe) {
-          selectedRecipe = recipe;
+        selectedRecipe = recipe;
       }
 
       function getSelectedRecipe() {
-               return selectedRecipe;
+        return selectedRecipe;
       }
 
       /**
@@ -30,14 +30,15 @@
       function saveRecipe(user, recipe) {
         var record = {
           title: recipe.title,
-            directions: recipe.directions,
-            public: false
+          directions: recipe.directions,
+          public: false,
+          user: user.uid
         };
-        record[user.uid] = true;
+
         recipesRef.$add(record)
           .then(
-            function(successResponse){
-            var newRef = firebase.database().ref("recipes").child(successResponse.key).child('ingredients');
+            function (successResponse) {
+              var newRef = firebase.database().ref("recipes").child(successResponse.key).child('ingredients');
               var ingredientsRef = $firebaseArray(newRef);
               for (var i = 0; i < recipe.ingredients.length; i++) {
                 ingredientsRef.$add(recipe.ingredients[i]);
@@ -51,22 +52,26 @@
       function editRecipe(user, recipe) {
         var record = {
           title: recipe.title,
-          ingredients:recipe.ingredients,
-          directions: recipe.directions
+          ingredients: recipe.ingredients,
+          directions: recipe.directions,
+          user: user.uid
         };
-        record[user.uid] = true;
         ref.child(recipe.$id).set(record);
       }
 
-      function getRecipes () {
+      function getRecipes(userId) {
         var promise = $q.defer();
-        recipesRef.$loaded(function() {
-            promise.resolve(recipesRef)
-        },
-          function(errorResponse) {
+        var newRef = firebase.database().ref("recipes").orderByChild('user').equalTo(userId);
+        var userRecipes = $firebaseArray(newRef);
+        userRecipes.$loaded(
+          function(successResponse)
+          {
+            promise.resolve(successResponse);
+          },
+          function(errorResponse)
+          {
             promise.reject(errorResponse);
           });
-
         return promise.promise;
       }
 
