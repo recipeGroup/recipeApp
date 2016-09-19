@@ -8,17 +8,35 @@
       <!-- Day 5, Fri- this button shows edit div -->
       <button class="button icon-left ion-edit button-energized" on-tap="vm.editing=!vm.editing"></button>
 
-      <div class="item item-text-wrap" style="font-weight:bold; font-size:x-large" align="center">{{ vm.selectedRecipe.title }}       </div>
-      <div class="item item-text-wrap" ng-repeat="ingredient in vm.selectedRecipe.ingredients">{{ ingredient.quantity }}of {{ ingredient.name }} </div>
+      <div class="item item-text-wrap" style="font-weight:bold; font-size:x-large" align="center">{{
+        vm.selectedRecipe.title }}
+      </div>
+      <div class="item item-text-wrap" ng-repeat="ingredient in vm.selectedRecipe.ingredients">{{ ingredient.quantity }}
+        of {{ ingredient.name }}
+      </div>
       <div class="item item-text-wrap"> {{ vm.selectedRecipe.directions }}</div>
     </div>
 
     <div class="card" ng-show="vm.editing">
-      <input class="item item-text-wrap" ng-model="vm.selectedRecipe.title">
-      <input class="item item-text-wrap" ng-repeat="ingredient in vm.selectedRecipe.ingredients">{{ ingredient.quantity }} of {{ingredient.name }} </input>
-      <input class="item item-text-wrap" > {{vm.selectedRecipe.directions}}</input>
-      <br>
-      <button class="button button-full button-positive" on-tap="vm.saveRecipe(vm.recipe)">Save Recipe</button>
+      <label class="item item-input">
+        <span class="input-label">Title</span>
+        <input type="text" ng-model="vm.selectedRecipe.title">
+      </label>
+      <div ng-repeat="ingredient in vm.selectedRecipe.ingredients">
+        <label class="item item-input">
+          <span class="input-label">Ingredient Name</span>
+          <input type="text" ng-model="ingredient.name">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Ingredient Quantity</span>
+          <input type="text" ng-model="ingredient.quantity">
+        </label>
+      </div>
+      <label class="item item-input">
+        <span class="input-label">Directions</span>
+        <textarea ng-model="vm.selectedRecipe.directions" style="width: 14em; height: 5em;" ></textarea>
+      </label>
+      <button class="button button-full button-positive" on-tap="vm.saveRecipe(vm.selectedRecipe)">Save Recipe</button>
     </div>
   </ion-content>
 </ion-pane>

@@ -11,7 +11,8 @@
   function recipeDetailController(authenticationService, recipesService) {
     var vm = this;
     vm.$onInit = onInit;
-    
+    vm.saveRecipe = saveRecipe;
+
     /**
      * @kazeki1 create the onLoad event in authenticationService and added it to initial check
      * @kazeki1 created the variable selectedRecipe and set it equal to the SelectedRecipe
@@ -23,7 +24,10 @@
        */
       vm.selectedRecipe = recipesService.getSelectedRecipe();
     }
-    
+
+     function saveRecipe(recipe) {
+       recipesService.editRecipe(vm.user, recipe);
+     }
   }
 })();
 
