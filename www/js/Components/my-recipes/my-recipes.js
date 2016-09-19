@@ -30,7 +30,7 @@
       }
 
       function getRecipes() {
-        
+
         recipesService.getRecipes()
           .then(function(successResponse) {
             vm.recipes = successResponse;
@@ -39,13 +39,15 @@
             console.log(errorResponse);
           });
       }
-  
+
       function goToThisRecipe(recipe) {
         //Day 4, Thu- connect recipe values to recipesService
         recipesService.setSelectedRecipe(recipe);
+
+        vm.selectedRecipe = recipe;
         //Day 4, Thu-  change state to recipe-detail page
-        $state.go('tabs.recipeDetail');
+        //$state.go('tabs.recipeDetail');
       }
     }
-  
+
   })();
