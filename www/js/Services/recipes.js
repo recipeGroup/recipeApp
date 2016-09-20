@@ -13,6 +13,7 @@
       this.getRecipes = getRecipes;
       this.setSelectedRecipe = setSelectedRecipe;
       this.getSelectedRecipe = getSelectedRecipe;
+      this.redefineArray = redefineArray;
 
       function setSelectedRecipe(recipe) {
         selectedRecipe = recipe;
@@ -49,14 +50,8 @@
             })
       }
 
-      function editRecipe(user, recipe) {
-        var record = {
-          title: recipe.title,
-          ingredients: recipe.ingredients,
-          directions: recipe.directions,
-          user: user.uid
-        };
-        ref.child(recipe.$id).set(record);
+      function editRecipe(recipe) {
+        ref.child(recipe.$id).update(recipe);
       }
 
       function getRecipes(userId) {
@@ -66,12 +61,26 @@
         userRecipes.$loaded(
           function(successResponse)
           {
+            successResponse.forEach( function(arrayNode) {
+              var ref = firebase.database().ref('recipes/' + arrayNode.$id + '/ingredients');
+              arrayNode.ingredients =  $firebaseArray(ref);
+              return arrayNode;
+            });
             promise.resolve(successResponse);
           },
           function(errorResponse)
           {
             promise.reject(errorResponse);
           });
+        return promise.promise;
+      }
+
+      function redefineArray (recipeId) {
+        var promise = $q.defer();
+        var ref = firebase.database().ref('recipes/' + recipeId + '/ingredients');
+        var ingredientsArray = $firebaseArray(ref);
+          promise.resolve(ingredientsArray);
+          promise.reject('error');
         return promise.promise;
       }
 
