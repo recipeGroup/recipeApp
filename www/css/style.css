@@ -23,5 +23,28 @@
   font-size: 2em;
 }
 
+#detailTitle {
+  width: 100%;
+  font-weight:bolder;
+  font-size:x-large;
+  text-align: center;
+  background-color: transparent;
+}
+
+.detailName, .detailQuantity {
+  width:40%;
+  text-align:center;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.flex-row i {
+  font-size: 2em;
+}
 
 

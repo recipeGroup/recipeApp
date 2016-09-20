@@ -13,35 +13,37 @@
         vm.selectedRecipe.title }}
       </div>
       <div class="item item-text-wrap" ng-repeat="ingredient in vm.selectedRecipe.ingredients">{{ ingredient.quantity
-        }}of {{ ingredient.name }}
+        }} of {{ ingredient.name }}
 
       </div>
       <div class="item item-text-wrap"> {{ vm.selectedRecipe.directions }}</div>
-
     </div>
 
-    <div class="card" ng-show="vm.editing">
-      <label class="item item-input">
-        <span class="input-label">Title</span>
-        <input type="text" ng-model= vm.selectedRecipe.title>
-      </label>
-      <div ng-repeat="ingredient in vm.selectedRecipe.ingredients">
-        <button class="button button-small icon-left ion-trash-a button-assertive" on-tap="deleteLine()"></button>
-        <label class="item item-input">
-          <span class="input-label">Ingredient</span>
-          <input type="text" ng-model=ingredient.name>
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Quantity</span>
-          <input type="text" ng-model=ingredient.quantity>
-        </label>
-      </div>
+    <ion-list class="myList" ng-show="vm.editing">
+      <ion-item class="item-divider">
+      <input id="detailTitle" type="text" ng-model=vm.selectedRecipe.title>
+      </ion-item>
+      <ion-item ng-repeat="ingredient in vm.selectedRecipe.ingredients" class="flex-row">
+        <span>{{$index + 1}}. </span>
+        <input class="detailQuantity" type="text" ng-model=ingredient.quantity placeholder="3 Cups">
+          <span>|</span>
+          <input class="detailName" type="text" ng-model=ingredient.name placeholder="Flour">
+        <button class="button button-assertive button-small"
+                on-tap="vm.deleteLine(ingredient)">
+          <i class="ion-trash-a"></i>
+        </button>
+      </ion-item>
+      <button class="button button-full button-positive"
+              on-tap="vm.addLine()">Add ingredient</button>
       <label class="item item-input">
         <span class="input-label">Directions</span>
-        <textarea ng-model=vm.selectedRecipe.directions style="width: 14em; height: 5em;"></textarea>
+        <textarea ng-model=vm.selectedRecipe.directions
+                  style="width: 14em; height: 5em;"></textarea>
       </label>
-      <button class="button button-full button-positive" on-tap="vm.saveRecipe(vm.selectedRecipe)">Save Recipe</button>
-    </div>
+      <button class="button button-full button-positive"
+              on-tap="vm.saveRecipe(vm.selectedRecipe)">Save Recipe
+      </button>
+    </ion-list>
     <button class="button button-full button-positive" on-tap="vm.goBack()">Back to My Recipes</button>
   </ion-content>
 </ion-pane>
