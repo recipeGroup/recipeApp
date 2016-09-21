@@ -17,23 +17,32 @@
 
       <div>
         <!-- This div is where the user can provide ingredients information one by one, which is then added to the vm.recipe.ingredients Array-->
-        <label class="item item-input">
-          <span class="input-label">Ingredient</span>
-          <input type="text" ng-model="vm.ingredient" placeholder="Milk">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Quantity</span>
-          <input type="text" ng-model="vm.quantity" placeholder="1/2 Cup">
-        </label>
+        <ion-item class="flex-row">
+          <label class="item item-input" style="border: none">
+            <span class="input-label">Quantity</span>
+            <input class="detailQuantity" type="text" ng-model=vm.quantity placeholder="3 Cups">
+          </label>
+          <span>|</span>
+          <label class="item item-input" style="border: none">
+            <span class="input-label">Ingredient</span>
+            <input class="detailname" type="text" ng-model=vm.ingredient placeholder="Flour">
+          </label>
+        </ion-item>
       <button class="button button-full button-positive"
               on-tap="vm.addIngredient(vm.ingredient, vm.quantity)">Add ingredient</button>
       </div>
 
       <!-- This Div does an ng-repeat through all of the ingredients to dispaly them to the user upon creation-->
-      <div ng-repeat="ingredient in vm.recipe.ingredients">
+      <ion-item ng-repeat="ingredient in vm.recipe.ingredients" class="flex-row">
         <span>{{$index + 1}}. </span>
-        <span ng-bind="ingredient.quantity"></span> of <span ng-bind='ingredient.name'></span>
-      </div>
+        <input class="detailQuantity" type="text" ng-model=ingredient.quantity>
+        <span>|</span>
+        <input class="detailName" type="text" ng-model=ingredient.name>
+        <button class="button button-assertive button-small"
+                on-tap="vm.deleteIngredient($index)">
+          <i class="ion-trash-a"></i>
+        </button>
+      </ion-item>
 
       <!-- This label allows the user to define directions, which are simply one large string-->
       <label class="item item-input">

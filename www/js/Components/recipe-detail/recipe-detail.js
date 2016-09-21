@@ -29,10 +29,11 @@
     }
 
     function saveRecipe(recipe) {
-      console.log(recipe);
       recipesService.editRecipe(recipe)
         .then(
-          function () {
+          function (successResponse) {
+            console.log(successResponse);
+            vm.selectedRecipe.ingredients = successResponse;
             toastService.showToast('Changes to ' + vm.selectedRecipe.title + ' saved!');
           },
           function () {
@@ -44,43 +45,27 @@
     }
 
     function addLine() {
-        var newIngredient = {
-          name: '',
-          quantity: ''
-        };
-      vm.selectedRecipe.ingredients.$add(newIngredient)
+      recipesService.addIngredient(vm.selectedRecipe)
         .then(
-          function () {
-          recipesService.redefineArray(vm.selectedRecipe.$id)
-            .then(
-              function(successResponse) {
-                vm.selectedRecipe.ingredients = successResponse;
-              },
-              function() {}
-            )
+          function (successResponse) {
+            vm.selectedRecipe.ingredients = successResponse;
           },
-          function () {}
-        )
+          function (errorResponse) {
+            console.log(errorResponse);
+          });
 
     }
 
-    function deleteLine(ingredient) {
-      vm.selectedRecipe.ingredients.$remove(ingredient)
+    function deleteLine(index) {
+      recipesService.deleteIngredient(vm.selectedRecipe, index)
         .then(
-          function () {
-            recipesService.redefineArray(vm.selectedRecipe.$id)
-              .then(
-                function(successResponse) {
-                  vm.selectedRecipe.ingredients = successResponse;
-                  console.log(successResponse);
-                },
-                function() {}
-              )
+          function (successResponse) {
+            vm.selectedRecipe.ingredients = successResponse;
           },
-          function () {}
-        )
+          function (errorResponse) {
+            console.log(errorResponse);
+          });
     }
-
   }
 })();
 
