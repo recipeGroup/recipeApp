@@ -38,6 +38,10 @@
             url: '/recipeDetail',
             template: '<recipe-detail></recipe-detail>'
           })
+        .state('tabs.browse', {
+          url: '/browse',
+          template: '<browse></browse>'
+        })
         .state('tabs.home', {
           url: '/home',
           template: '<home></home>'
