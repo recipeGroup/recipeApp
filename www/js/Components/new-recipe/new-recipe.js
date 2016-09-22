@@ -7,7 +7,7 @@
         controller: newRecipeController,
         controllerAs: 'vm'
       });
-  function newRecipeController(authenticationService, recipesService, toastService) {
+  function newRecipeController(userService, recipesService, toastService) {
 
     //Declaring variables to be used by this controller
     var vm = this;
@@ -58,8 +58,8 @@
      * This checks with the authenticationService to ensure that the user is still logged in, so we can actually do the work we need to do.
      */
     function onInit() {
-      vm.user = authenticationService.initialCheck()
-    }
+      vm.user = userService.getUser();
+  }
 
     /**
      * @loghen41 this function requires a recipe to be passed to it, it assumes it will be the vm.recipe object we have been creating to this point
