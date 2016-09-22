@@ -7,7 +7,7 @@
         controller: myRecipesController,
         controllerAs: 'vm'
       });
-    function myRecipesController(authenticationService, $state, recipesService) {
+    function myRecipesController($state, recipesService, userService) {
 
       //Declaring Variables for the controller to user
       var vm = this;
@@ -22,7 +22,7 @@
       vm.goToThisRecipe = goToThisRecipe;
 
       function onInit() {
-        vm.user = authenticationService.initialCheck();
+        vm.user = userService.getUser();
         /**
          * @kazeki1 Day 4, Thu - if authentication passes call getRecipes
          */

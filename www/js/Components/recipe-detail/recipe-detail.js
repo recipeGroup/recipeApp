@@ -8,7 +8,7 @@
         controllerAs: 'vm'
       });
   //to connect to database and draw in selected recipe added authenticationService and recipesService
-  function recipeDetailController(authenticationService, recipesService, $state, toastService) {
+  function recipeDetailController(recipesService, $state, toastService) {
     var vm = this;
     vm.$onInit = onInit;
     vm.addLine = addLine;
@@ -21,7 +21,6 @@
      * @kazeki1 created the variable selectedRecipe and set it equal to the SelectedRecipe
      */
     function onInit() {
-      vm.user = authenticationService.initialCheck();
       /**
        * @kazeki1 Day 4, Thu- load selectedRecipe with selected recipe held in recipesService
        */

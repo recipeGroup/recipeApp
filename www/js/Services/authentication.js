@@ -1,12 +1,10 @@
 (function () {
   angular.module('app')
-    .service('authenticationService', function ($sessionStorage, $localStorage, $firebaseObject, $firebaseAuth, $q, $state) {
+    .service('authenticationService', function ($sessionStorage, $localStorage, $firebaseObject, $firebaseAuth, $q, $state, userService) {
 
       this.login = login;
       this.logout = logout;
       this.createUserFromEmail = createUserFromEmail;
-      this.initialCheck = initialCheck;
-      var user;
 
       /**
        * @loghen41 createUserFromEmail() creates a user in firebase based on the email and password given to it
@@ -26,7 +24,8 @@
             var profileRef = ref.child(firebaseUser.uid);
             var theUser = $firebaseObject(profileRef);
             var userStorage = window.localStorage.getItem('firebase:authUser:AIzaSyDtNbp-weG3kHrkLuhl6f9Ymy5JMQ0F8W8:[DEFAULT]');
-            user = JSON.parse(userStorage);
+            var user = JSON.parse(userStorage);
+            userService.setUser(user);
 
             theUser.$loaded().then(
               profileRef.set({
@@ -35,7 +34,7 @@
                 photoURL: firebaseUser.photoURL
               })
             );
-            promise.resolve(user);
+            promise.resolve();
           })
           .catch(function (creationError) {
             promise.reject(creationError)
@@ -43,24 +42,6 @@
 
         return promise.promise;
 
-      }
-
-      /**
-       * @loghen41 initialCheck() checks for the user object, and either returns it, sets is and returns it, or routes you to the login page to make the user login
-       * @returns {*}
-         */
-      function initialCheck() {
-        if (user) {
-          return user;
-        }
-        else if (window.localStorage.getItem('firebase:authUser:AIzaSyDtNbp-weG3kHrkLuhl6f9Ymy5JMQ0F8W8:[DEFAULT]')) {
-          var userStorage = window.localStorage.getItem('firebase:authUser:AIzaSyDtNbp-weG3kHrkLuhl6f9Ymy5JMQ0F8W8:[DEFAULT]');
-          user = JSON.parse(userStorage);
-          return user;
-        }
-        else {
-          $state.go("tabs.login")
-        }
       }
 
       /**
@@ -83,8 +64,9 @@
           auth.$signInWithEmailAndPassword(email, password)
             .then(function (loginSuccess) {
               var userStorage = window.localStorage.getItem('firebase:authUser:AIzaSyDtNbp-weG3kHrkLuhl6f9Ymy5JMQ0F8W8:[DEFAULT]');
-              user = JSON.parse(userStorage);
-              promise.resolve(user);
+              var user = JSON.parse(userStorage);
+              userService.setUser(user);
+              promise.resolve();
             })
             .catch(function (loginError) {
               promise.reject(loginError);
@@ -98,7 +80,8 @@
 
             .then(function (firebaseUser) {
               var userStorage = window.localStorage.getItem('firebase:authUser:AIzaSyDtNbp-weG3kHrkLuhl6f9Ymy5JMQ0F8W8:[DEFAULT]');
-              user = JSON.parse(userStorage);
+              var user = JSON.parse(userStorage);
+              userService.setUser(user);
               var ref = firebase.database().ref("users");
               var profileRef = ref.child(firebaseUser.user.uid);
               var theUser = $firebaseObject(profileRef);
@@ -114,7 +97,7 @@
                 }
               );
                $state.reload('tabs');
-              promise.resolve(user)
+              promise.resolve();
             }).catch(function (error) {
             promise.reject(error);
           });
@@ -130,7 +113,8 @@
       function logout() {
         var auth = $firebaseAuth();
         auth.$signOut();
-        user = undefined;
+        var user = undefined;
+        userService.setUser(user);
         $state.go('tabs.login');
 
         return user;

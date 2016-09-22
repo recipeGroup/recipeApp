@@ -1,0 +1,51 @@
+<!--160922-0800_recipeApp_our-profile_html-->
+<ion-pane>
+  <ion-header-bar class="bar-positive" align-title="center">
+    <i ui-sref="tabs.profile" class="icon ion-person avatar"/></i>
+    <h1 class="title">Profile</h1>
+  </ion-header-bar>
+
+<ion-content class="flex-row">
+  <ion-spinner ng-show="!vm.data"></ion-spinner>
+</ion-content>
+
+  <ion-content >
+    <ion-list ng-show="vm.data">
+      <form name="profileForm" ng-submit="vm.saveProfile(vm.data); profileForm.$pristine = true;">
+        <label class="item item-input flex-row">
+          <span class="input-label">YOUR NAME</span>
+          <input type="text" placeholder="First" ng-model="vm.data.name_first" required>
+          <input type="text" placeholder="Last" ng-model="vm.data.name_last" required>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">ALIAS</span>
+          <input type="text" placeholder="Site Nick Name" ng-model="vm.data.displayName" required>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">AVATAR URL</span>
+          <input type="text" name="avatarURL" ng-model="vm.data.photoURL" placeholder="http://facebook.com/profilePic" required />
+        </label>
+        <label class="item item-input">
+          <span class="input-label">EMAIL</span>
+          <input type="email" name="username" ng-model="vm.data.email" ng-minlength="5" placeholder="email"
+                 ng-disabled="true" required/>
+        </label>
+        <ion-item class="flex-row">
+          <div>
+            <ion-radio ng-model="vm.data.gender" ng-value="'Male'">Male</ion-radio>
+          </div>
+          <div>
+            <ion-radio ng-model="vm.data.gender" ng-value="'Female'">Female</ion-radio>
+          </div>
+          <div>
+            <ion-radio ng-model="vm.data.gender" required ng-value="'Other'">Other</ion-radio>
+          </div>
+        </ion-item>
+        <button class="button button-full button-positive"
+                ng-disabled="profileForm.$invalid || profileForm.$pristine" type="submit">Save Profile
+        </button>
+      </form>
+    </ion-list>
+
+  </ion-content>
+</ion-pane>

@@ -1,9 +1,12 @@
+.avatar {
+  font-size: 2em;
+  margin: .2em;
+}
+
 #homeComponent {
   text-align: center;
   margin-top: 2em;
 }
-
-
 
 #loginComponent {
   padding: .3em;

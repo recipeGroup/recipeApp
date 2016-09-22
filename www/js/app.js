@@ -50,6 +50,10 @@
           url: '/newRecipe',
           template: '<new-recipe></new-recipe>'
         })
+        .state('tabs.profile', {
+          url: '/profile',
+          template: '<profile></profile>'
+        })
     })
 
     //this is the run state for ionic, it is what makes the actual native application for mobile devices

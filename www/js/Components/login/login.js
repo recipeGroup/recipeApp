@@ -7,7 +7,7 @@
         controller: loginController,
         controllerAs: 'vm'
       });
-  function loginController(authenticationService, toastService, $state) {
+  function loginController(authenticationService, toastService, $state, userService) {
 
     var vm = this;
     vm.$onInit = onInit;
@@ -31,20 +31,14 @@
       }
       else {
         authenticationService.createUserFromEmail(email, password1)
-          .then(function (response) {
-            vm.user = response;
-            $state.reload('tabs')
-              .then(function () {
+          .then(function () {
+            vm.user = userService.getUser();
                   if (vm.user.displayName) {
                     toastService.showToast(vm.user.displayName + " Logged In!");
                   } else {
                     toastService.showToast(vm.user.email + " logged in!");
                   }
                   $state.go('tabs.home');
-                },
-                function (error) {
-                  console.log(error);
-                })
           }, function (error) {
             toastService.showToast(error);
 
@@ -66,17 +60,14 @@
       }
 
       authenticationService.login(provider, email, password)
-        .then(function (response) {
-            vm.user = response;
-            $state.reload('tabs')
-              .then(function () {
+        .then(function () {
+            vm.user = userService.getUser();
                 if (vm.user.displayName) {
                   toastService.showToast(vm.user.displayName + " Logged In!");
                 } else {
                   toastService.showToast(vm.user.email + " logged in!");
                 }
                 $state.go('tabs.home');
-              })
           },
           function (error) {
             toastService.showToast(error)
@@ -93,15 +84,15 @@
         toastService.showToast(vm.user.email + " logged out!");
       }
 
-      vm.user = authenticationService.logout();
+      authenticationService.logout();
+      delete vm.user;
     }
 
     /**
      * @loghen41 onInit() is called once the controller is loaded, and calls authenticationService.initialCheck() to see if the user exists and route the page accordingly
      */
     function onInit() {
-      vm.user = authenticationService.initialCheck();
-
+      vm.user = userService.getUser();
     }
 
     /**
