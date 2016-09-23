@@ -10,6 +10,17 @@
     function browseOnlineController(apiCallsService) {
       var vm = this;
       vm.$onInit = onInit;
+      vm.onlineDetails = onlineDetails;
+
+      function onlineDetails(recipeId) {
+        apiCallsService.getRecipe(recipeId)
+          .then( function (sucessResponse) {
+            vm.selectedRecipe = sucessResponse;
+          }, function (errorResponse) {
+            console.log(errorResponse)
+
+        })
+      }
 
       function onInit() {
         apiCallsService.browseRecipes().then(
