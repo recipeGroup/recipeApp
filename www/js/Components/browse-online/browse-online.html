@@ -3,23 +3,28 @@
     <i ui-sref="tabs.profile" class="icon ion-person avatar"/></i>
     <h1 class="title">Browse</h1>
   </ion-header-bar>
+    <ion-content ng-show="!vm.recipes" class="flex-row">
+      <ion-spinner ></ion-spinner>
+    </ion-content>
   <ion-content id="browseAll" ng-show="!vm.selectedRecipe">
     <ion-list>
-      <div on-tap="vm.onlineDetails(recipe.recipe_id)" class="item list-item flex-row"  ng-repeat="recipe in vm.recipes">
-        <img style="max-height: 6em;" ng-src="{{recipe.image_url}}">
+      <div on-tap="vm.onlineDetails(recipe.recipe_id)" class="item list-item flex-row" ng-repeat="recipe in vm.recipes">
+        <img style="max-height: 6em;" ng-src="{{recipe.image_url}}" />
         <h3>{{ recipe.title }}</h3>
         <span></span>
       </div>
     </ion-list>
   </ion-content>
   <ion-content id="browseDetail" ng-show="vm.selectedRecipe">
-    <ion-list>
-      <div  class="item list-item flex-row"  ng-repeat="recipe in vm.recipes">
-        <img style="max-height: 6em;" ng-src="{{recipe.image_url}}">
-        <h3>{{ recipe.title }}</h3>
-        <h4>{{ recipe.ingredients }}</h4>
-        <span></span>
+    <button class="button icon-left ion-heart button-assertive" on-tap="vm.editing=!vm.editing"></button>
+    <div class="card">
+      <img class="item" style="max-height: 6em;" ng-src="{{vm.selectedRecipe.image_url}}" />
+      <h3 class="item">{{vm.selectedRecipe.publisher}}</h3>
+      <div class="item item-text-wrap" style="font-weight:bold; font-size:x-large" align="center">{{
+        vm.selectedRecipe.title }}
       </div>
-    </ion-list>
+      <div class="item item-text-wrap flex-row" ng-repeat="ingredient in vm.selectedRecipe.ingredients">{{ ingredient}} </div>
+        <a class="item item-text-wrap flex-row" href="{{ vm.selectedRecipe.source_url }}">{{ vm.selectedRecipe.source_url }}</a>
+    </div>
   </ion-content>
 </ion-pane>
