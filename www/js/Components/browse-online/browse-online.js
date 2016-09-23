@@ -14,8 +14,9 @@
 
       function onlineDetails(recipeId) {
         apiCallsService.getRecipe(recipeId)
-          .then( function (sucessResponse) {
-            vm.selectedRecipe = sucessResponse;
+          .then( function (successResponse) {
+            console.log(successResponse);
+            vm.selectedRecipe = successResponse.recipe;
           }, function (errorResponse) {
             console.log(errorResponse)
 
