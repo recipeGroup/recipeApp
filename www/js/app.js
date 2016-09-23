@@ -42,6 +42,14 @@
           url: '/browse',
           template: '<browse></browse>'
         })
+        .state('tabs.browseApp', {
+          url: '/browseApp',
+          template: '<browse-app></browse-app>'
+        })
+        .state('tabs.browseOnline', {
+          url: '/browseOnline',
+          template: '<browse-online></browse-online>'
+        })
         .state('tabs.home', {
           url: '/home',
           template: '<home></home>'
