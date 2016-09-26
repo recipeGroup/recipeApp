@@ -3,10 +3,10 @@
     <i ui-sref="tabs.profile" class="icon ion-person avatar"/></i>
     <h1 class="title">Browse</h1>
   </ion-header-bar>
-    <ion-content ng-show="!vm.recipes" class="flex-row">
+    <ion-content ng-show="!vm.recipes" class="flex-row has-header has-subheader">
       <ion-spinner ></ion-spinner>
     </ion-content>
-  <ion-content id="browseAll" ng-show="!vm.selectedRecipe">
+  <ion-content id="browseAllComponent" ng-show="!vm.selectedRecipe">
     <ion-list>
       <div on-tap="vm.onlineDetails(recipe.recipe_id)" class="item list-item flex-row" ng-repeat="recipe in vm.recipes">
         <img style="max-height: 6em;" ng-src="{{recipe.image_url}}" />
@@ -15,7 +15,7 @@
       </div>
     </ion-list>
   </ion-content>
-  <ion-content id="browseDetail" ng-show="vm.selectedRecipe">
+  <ion-content id="browseDetail" ng-show="vm.selectedRecipe" class="has-header has-subheader">
    <!-- <button class="button icon-left ion-heart button-assertive" on-tap="vm.editing=!vm.editing"></button> -->
     <div class="card">
       <img class="item" style="max-height: 6em;" ng-src="{{vm.selectedRecipe.image_url}}" />

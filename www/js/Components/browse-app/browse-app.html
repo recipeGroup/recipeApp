@@ -3,7 +3,7 @@
     <i ui-sref="tabs.profile" class="icon ion-person avatar"/></i>
     <h1 class="title">App Recipes</h1>
   </ion-header-bar>
-  <ion-content ng-show="!vm.appRecipes" class="flex-row">
+  <ion-content ng-show="!vm.appRecipes" class="flex-row has-header has-subheader">
     <ion-spinner ></ion-spinner>
   </ion-content>
   <ion-content id="browseAppComponent" ng-show="vm.appRecipes && !vm.selectedRecipe">
@@ -11,7 +11,7 @@
       {{recipe.title}}
     </button>
   </ion-content>
-  <ion-content id="browseDetail" ng-show="vm.selectedRecipe">
+  <ion-content id="browseDetail" ng-show="vm.selectedRecipe" class="has-header has-subheader">
    <!-- <button class="button icon-left ion-heart button-assertive" on-tap="vm.saveRecipe(vm.selectedRecipe);"></button> -->
     <div class="card">
       <div class="item item-text-wrap" style="font-weight:bold; font-size:x-large" align="center">{{
