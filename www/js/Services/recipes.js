@@ -9,6 +9,7 @@
       this.addIngredient = addIngredient;
       this.deleteIngredient = deleteIngredient;
       this.editRecipe = editRecipe;
+      this.getAppRecipes = getAppRecipes;
       this.getRecipes = getRecipes;
       this.getSelectedRecipe = getSelectedRecipe;
       this.saveRecipe = saveRecipe;
@@ -84,7 +85,8 @@
         //var record is a local object that has been prepared to make an update to the database
         var record = {
           title: recipe.title,
-          directions: recipe.directions
+          directions: recipe.directions,
+          status: recipe.status
         };
 
         //var ref is a firebase reference to the recipes table
@@ -111,6 +113,25 @@
 
       }
 
+      function getAppRecipes() {
+        var promise = $q.defer();
+        var newRef = firebase.database().ref("recipes").orderByChild('status').equalTo('public');
+        var userRecipes = $firebaseArray(newRef);
+        userRecipes.$loaded(
+          function (successResponse) {
+            successResponse.forEach(function (arrayNode) {
+              var ref = firebase.database().ref('recipes/' + arrayNode.$id + '/ingredients');
+              arrayNode.ingredients = $firebaseArray(ref);
+              return arrayNode;
+            });
+            promise.resolve(successResponse);
+          },
+          function (errorResponse) {
+            promise.reject(errorResponse);
+          });
+        return promise.promise;
+      }
+
       function getRecipes(userId) {
         var promise = $q.defer();
         var newRef = firebase.database().ref("recipes").orderByChild('user').equalTo(userId);
@@ -129,6 +150,8 @@
           });
         return promise.promise;
       }
+
+     
 
       /**
        * @loghen41 allows the controller to get the selectedRecipe variable in the service
@@ -158,7 +181,7 @@
         var record = {
           title: recipe.title,
           directions: recipe.directions,
-          public: recipe.value,
+          status: recipe.status,
           user: user.uid
         };
 
@@ -195,7 +218,7 @@
         selectedRecipe = recipe;
       }
 
-      
+
 
     })
 })();

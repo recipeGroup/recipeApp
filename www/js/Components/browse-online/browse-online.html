@@ -16,15 +16,16 @@
     </ion-list>
   </ion-content>
   <ion-content id="browseDetail" ng-show="vm.selectedRecipe">
-    <button class="button icon-left ion-heart button-assertive" on-tap="vm.editing=!vm.editing"></button>
+   <!-- <button class="button icon-left ion-heart button-assertive" on-tap="vm.editing=!vm.editing"></button> -->
     <div class="card">
       <img class="item" style="max-height: 6em;" ng-src="{{vm.selectedRecipe.image_url}}" />
       <h3 class="item">{{vm.selectedRecipe.publisher}}</h3>
       <div class="item item-text-wrap" style="font-weight:bold; font-size:x-large" align="center">{{
         vm.selectedRecipe.title }}
       </div>
-      <div class="item item-text-wrap flex-row" ng-repeat="ingredient in vm.selectedRecipe.ingredients">{{ ingredient}} </div>
+      <div class="item item-text-wrap flex-row" ng-repeat="ingredient in vm.selectedRecipe.ingredients track by $index">{{ ingredient}} </div>
         <a class="item item-text-wrap flex-row" href="{{ vm.selectedRecipe.source_url }}">{{ vm.selectedRecipe.source_url }}</a>
     </div>
+    <button class="button button-full button-positive" on-tap="vm.goBack()">Back to Browse</button>
   </ion-content>
 </ion-pane>

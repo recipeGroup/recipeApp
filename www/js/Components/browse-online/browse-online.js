@@ -11,6 +11,11 @@
       var vm = this;
       vm.$onInit = onInit;
       vm.onlineDetails = onlineDetails;
+      vm.goBack = goBack;
+
+      function goBack() {
+        vm.selectedRecipe = undefined;
+      }
 
       function onlineDetails(recipeId) {
         apiCallsService.getRecipe(recipeId)

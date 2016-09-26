@@ -51,6 +51,16 @@
         <textarea ng-model="vm.recipe.directions" style="width: 14em; height: 5em;"
                   placeholder="1. Get the Oven Hot"></textarea>
       </label>
+      <ion-item class="item-toggle">
+        <span >{{vm.recipe.status}}</span>
+        <label class="toggle">
+          <input type="checkbox" ng-model="vm.recipe.status" ng-true-value="'public'"
+                 ng-false-value="'private'">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </ion-item>
 
       <!-- This button Submits the vm.recipe object to firebase-->
       <button class="button button-full button-positive" on-tap="vm.saveRecipe(vm.recipe)">Save Recipe</button>
