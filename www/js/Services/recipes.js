@@ -158,7 +158,7 @@
         var record = {
           title: recipe.title,
           directions: recipe.directions,
-          public: false,
+          public: recipe.value,
           user: user.uid
         };
 
