@@ -6,7 +6,7 @@
   <ion-content ng-show="!vm.appRecipes" class="flex-row has-header has-subheader">
     <ion-spinner ></ion-spinner>
   </ion-content>
-  <ion-content id="browseAppComponent" ng-show="vm.appRecipes && !vm.selectedRecipe">
+  <ion-content id="browseAppComponent" class="has-header has-subheader" ng-show="vm.appRecipes && !vm.selectedRecipe">
     <button class="button button-full button-stable" on-tap="vm.selectRecipe(recipe)" ng-repeat="recipe in vm.appRecipes">
       {{recipe.title}}
     </button>
