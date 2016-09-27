@@ -37,7 +37,7 @@
         </button>
       </ion-item>
       <button class="button button-full button-positive"
-              on-tap="vm.addLine()">Add ingredient
+      on-tap="vm.addLine()">Add ingredient
       </button>
       <label class="item item-input">
         <span class="input-label">Directions</span>
@@ -54,7 +54,8 @@
           </div>
         </label>
       </ion-item>
-      <button class="button button-block button-positive" on-tap="vm.saveRecipe(vm.selectedRecipe)">Save Recipes</button>
+      <button class="button button-block button-positive" on-tap="vm.saveRecipe(vm.selectedRecipe)">Save Recipe</button>
+      <button class="button button-block button-assertive" on-tap="vm.deleteRecipe(vm.selectedRecipe)">Delete Recipe</button>
     </ion-list>
 
     <button class="button button-block button-positive" on-tap="vm.goBack()">Back to My Recipes</button>
