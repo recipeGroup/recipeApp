@@ -9,7 +9,7 @@
     <!-- This is the new Recipes Form, where the user can input a new Recipe-->
 
     <!-- All of the information gathered in the newRecipeForm is assigned as a property on the vm.recipe object, which is then submitted to be stored in firebase and refreshed-->
-    <form name="newRecipeForm" >
+    <form name="newRecipeForm">
       <!-- Here the user provides a title for the recipe-->
       <label class="item item-input">
         <span class="input-label">Title</span>
@@ -18,19 +18,19 @@
 
       <div>
         <!-- This div is where the user can provide ingredients information one by one, which is then added to the vm.recipe.ingredients Array-->
-        <ion-item class="flex-row">
-          <label class="item item-input" style="border: none">
+        <ion-item class="flex-row item item-input">
+          <label for="vm.quantity">
             <span class="input-label">Quantity</span>
-            <input class="detailQuantity" type="text" ng-model=vm.quantity placeholder="3 Cups">
           </label>
-          <span>|</span>
-          <label class="item item-input" style="border: none">
+          <input class="detailQuantity" id='vm.quantity' type="text" ng-model=vm.quantity placeholder="3 Cups">
+          <label for="vm.ingredient">
             <span class="input-label">Ingredient</span>
-            <input class="detailname" type="text" ng-model=vm.ingredient placeholder="Flour">
           </label>
+          <input class="detailname" id='vm.ingredient' type="text" ng-model=vm.ingredient placeholder="Flour" style="text-align: center">
         </ion-item>
-      <button class="button button-full button-positive"
-              on-tap="vm.addIngredient(vm.ingredient, vm.quantity)">Add ingredient</button>
+        <button class="button button-full button-positive"
+                on-tap="vm.addIngredient(vm.ingredient, vm.quantity)">Add ingredient
+        </button>
       </div>
 
       <!-- This Div does an ng-repeat through all of the ingredients to dispaly them to the user upon creation-->
@@ -52,7 +52,7 @@
                   placeholder="1. Get the Oven Hot"></textarea>
       </label>
       <ion-item class="item-toggle">
-        <span >{{vm.recipe.status}}</span>
+        <span>{{vm.recipe.status}}</span>
         <label class="toggle">
           <input type="checkbox" ng-model="vm.recipe.status" ng-true-value="'Public'"
                  ng-false-value="'Private'">
