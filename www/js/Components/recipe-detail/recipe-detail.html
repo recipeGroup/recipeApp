@@ -3,7 +3,7 @@
     <i ui-sref="tabs.profile" class="icon ion-person avatar"/></i>
     <h1 class="title">Recipe Details</h1>
   </ion-header-bar>
-  <ion-content id="recipeDetailComponent">
+  <ion-content id="recipeDetailComponent" class="has-header has-subheader">
     <!-- Day 5, Fri- added card to hold tile and ingredients-->
     <div class="card" ng-show="!vm.editing">
       <!-- Day 5, Fri- this button shows edit div -->
@@ -18,6 +18,8 @@
 
       </div>
       <div class="item item-text-wrap flex-row"> {{ vm.selectedRecipe.directions }}</div>
+      <div class="item item-text-wrap" align="center">{{vm.selectedRecipe.status }}
+      </div>
     </div>
 
     <ion-list class="myList" ng-show="vm.editing">
@@ -42,22 +44,20 @@
         <textarea ng-model=vm.selectedRecipe.directions
                   style="width: 14em; height: 5em;"></textarea>
       </label>
-    </ion-list>
-    <ion-item ng-repeat=""  class="flex-row">
-        <ion-toggle
-          toggle-class="toggle-calm"
-          ng-model=value
-          ng-true-value="'PUBLIC'"
-          ng-false-value="'PRIVATE'"
-          ng-change="vm.saveRecipe.public(value)">
+      <ion-item class="item-toggle">
+        <span >{{vm.selectedRecipe.status}}</span>
+        <label class="toggle">
+          <input type="checkbox" ng-model="vm.selectedRecipe.status" ng-true-value="'public'"
+                 ng-false-value="'private'">
           <div class="track">
-          <div class="handle"></div>
-        </div>
-      <tt>{{value}}</tt><br/>
-    </ion-item>
-    <icon-item class="flex-row">
-      <button class="button button-large button-positive" on-tap="vm.goBack()">Back to My Recipes</button>
-    </icon-item>
+            <div class="handle"></div>
+          </div>
+        </label>
+      </ion-item>
+      <button class="button button-block button-positive" on-tap="vm.saveRecipe(vm.selectedRecipe)">Save Recipes</button>
+    </ion-list>
+
+    <button class="button button-block button-positive" on-tap="vm.goBack()">Back to My Recipes</button>
   </ion-content>
 
 </ion-pane>

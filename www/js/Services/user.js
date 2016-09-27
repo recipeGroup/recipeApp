@@ -8,7 +8,6 @@
       if (window.localStorage.getItem('firebase:authUser:AIzaSyDtNbp-weG3kHrkLuhl6f9Ymy5JMQ0F8W8:[DEFAULT]')) {
         var userStorage = window.localStorage.getItem('firebase:authUser:AIzaSyDtNbp-weG3kHrkLuhl6f9Ymy5JMQ0F8W8:[DEFAULT]');
         user = JSON.parse(userStorage);
-        update(user);
       }
 
       this.getUser = getUser;
@@ -36,6 +35,7 @@
         if (typeof param === 'function') {
           registeredFunctions.push(param);
         }
+        update(user);
       }
 
       function getProfile() {

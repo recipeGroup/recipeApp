@@ -5,7 +5,7 @@
     <h1 class="title">New Recipe</h1>
   </ion-header-bar>
 
-  <ion-content id="homeComponent">
+  <ion-content id="newRecipeComponent" class="has-header has-subheader">
     <!-- This is the new Recipes Form, where the user can input a new Recipe-->
 
     <!-- All of the information gathered in the newRecipeForm is assigned as a property on the vm.recipe object, which is then submitted to be stored in firebase and refreshed-->
@@ -51,6 +51,16 @@
         <textarea ng-model="vm.recipe.directions" style="width: 14em; height: 5em;"
                   placeholder="1. Get the Oven Hot"></textarea>
       </label>
+      <ion-item class="item-toggle">
+        <span >{{vm.recipe.status}}</span>
+        <label class="toggle">
+          <input type="checkbox" ng-model="vm.recipe.status" ng-true-value="'Public'"
+                 ng-false-value="'Private'">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </ion-item>
 
       <!-- This button Submits the vm.recipe object to firebase-->
       <button class="button button-full button-positive" on-tap="vm.saveRecipe(vm.recipe)">Save Recipe</button>

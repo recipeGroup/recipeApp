@@ -13,6 +13,7 @@
     var vm = this;
     vm.recipe = {};
     vm.recipe.ingredients = [];
+    vm.recipe.status = 'Public';
 
     //Declaring functions to be used by this controller
     vm.$onInit = onInit;
@@ -76,6 +77,7 @@
 
       //We reset the recipe Object to prepare it for a new recipe
       vm.recipe = {};
+      vm.recipe.status = 'private';
     }
 
   }

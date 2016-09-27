@@ -16,8 +16,8 @@
     vm.deleteLine = deleteLine;
     vm.goBack = goBack;
     vm.saveRecipe = saveRecipe;
-    vm.setPuborPriv = setPuborPriv;
-    // vm.toggleChange = toggleChange;
+
+
     /**
      * @kazeki1 create the onLoad event in authenticationService and added it to initial check
      * @kazeki1 created the variable selectedRecipe and set it equal to the SelectedRecipe
@@ -28,12 +28,11 @@
        */
       vm.selectedRecipe = recipesService.getSelectedRecipe();
     }
-    
+
     function saveRecipe(recipe) {
       recipesService.editRecipe(recipe)
                     .then(
                       function (successResponse) {
-                        console.log(successResponse);
                         vm.selectedRecipe.ingredients = successResponse;
                         toastService.showToast('Changes to ' + vm.selectedRecipe.title + ' saved!');
                       },
@@ -41,11 +40,11 @@
                       }
                     );
     }
-    
+
     function goBack() {
       $state.go('tabs.myRecipes');
     }
-    
+
     function addLine() {
       recipesService.addIngredient(vm.selectedRecipe)
                     .then(
@@ -56,9 +55,9 @@
                         console.log(errorResponse);
                       }
                     );
-      
+
     }
-    
+
     function deleteLine(index) {
       recipesService.deleteIngredient(vm.selectedRecipe, index)
                     .then(
@@ -71,22 +70,9 @@
                     );
     }
     
-    function setPuborPriv(value) {
-      console.log(value);
-      // recipesService.setPuborPriv(tog)
-      //               .then(
-      //                 function (successResponse) {
-      //                   vm.selectedRecipe.ingredients = successResponse;
-      //                 },
-      //                 function (errorResponse) {
-      //                   console.log(errorResponse);
-      //                 }
-      //               );
-      
-    }
   }
-  
-  
+
+
 })();
 
 
