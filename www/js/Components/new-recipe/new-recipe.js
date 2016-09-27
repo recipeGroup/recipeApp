@@ -13,7 +13,7 @@
     var vm = this;
     vm.recipe = {};
     vm.recipe.ingredients = [];
-    vm.recipe.status = 'private';
+    vm.recipe.status = 'Public';
 
     //Declaring functions to be used by this controller
     vm.$onInit = onInit;
