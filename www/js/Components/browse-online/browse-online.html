@@ -6,8 +6,12 @@
     <ion-content ng-show="!vm.recipes" class="flex-row has-header has-subheader">
       <ion-spinner ></ion-spinner>
     </ion-content>
-  <ion-content id="browseAllComponent" ng-show="!vm.selectedRecipe" class="has-header has-subheader">
+  <ion-content id="browseAllComponent" ng-show="vm.recipes && !vm.selectedRecipe" class="has-header has-subheader">
     <ion-list>
+      <div class="flex-row">
+      <button class="button button-positive marginBottom1" on-tap="vm.previousPage()">Previous Page</button>
+        <button class="button button-positive marginBottom1" on-tap="vm.nextPage()">Next Page</button>
+      </div>
       <div on-tap="vm.onlineDetails(recipe.recipe_id)" class="item list-item flex-row" ng-repeat="recipe in vm.recipes">
         <div style="width: 50%;" class="flex-row">
         <img style="max-height: 6em;" ng-src="{{recipe.image_url}}" />
@@ -16,6 +20,10 @@
         <h3>{{ recipe.title }}</h3>
         </div>
         <span></span>
+      </div>
+      <div class="flex-row">
+      <button class="button  button-positive marginTop1" on-tap="vm.previousPage()">Previous Page</button>
+        <button class="button button-positive marginTop1" on-tap="vm.nextPage()">Next Page</button>
       </div>
     </ion-list>
   </ion-content>

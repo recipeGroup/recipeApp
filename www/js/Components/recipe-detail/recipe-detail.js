@@ -16,6 +16,7 @@
     vm.deleteLine = deleteLine;
     vm.goBack = goBack;
     vm.saveRecipe = saveRecipe;
+    vm.deleteRecipe = deleteRecipe;
 
 
     /**
@@ -69,7 +70,19 @@
                       }
                     );
     }
-    
+
+    function deleteRecipe(recipe) {
+      recipesService.deleteRecipe(recipe)
+        .then(
+          function (successResponse) {
+            $state.go('tabs.myRecipes');
+            console.log(successResponse)
+          },
+          function (errorResponse) {
+            console.log(errorResponse)
+          }
+        )
+    }
   }
 
 
