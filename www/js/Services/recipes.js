@@ -14,9 +14,10 @@
       this.getSelectedRecipe = getSelectedRecipe;
       this.saveRecipe = saveRecipe;
       this.setSelectedRecipe = setSelectedRecipe;
+      this.deleteRecipe = deleteRecipe;
 
 
-      function addIngredient (recipeObject) {
+      function addIngredient(recipeObject) {
         var promise = $q.defer();
 
         var newIngredient = {
@@ -25,7 +26,7 @@
         };
 
         editRecipe(recipeObject)
-          .then(function(successResponse) {
+          .then(function (successResponse) {
             successResponse.$add(newIngredient)
               .then(
                 function () {
@@ -50,7 +51,7 @@
       function deleteIngredient(recipeObject, index) {
         var promise = $q.defer();
         editRecipe(recipeObject)
-          .then(function(successResponse) {
+          .then(function (successResponse) {
             successResponse.$remove(index)
               .then(
                 function () {
@@ -71,6 +72,20 @@
 
 
         return promise.promise;
+      }
+
+      function deleteRecipe(recipe) {
+        var promise = $q.defer();
+        firebase.database().ref("recipes/" + recipe.$id).remove()
+          .then(function (successResponse) {
+            promise.resolve(successResponse)
+          }, function (errorResponse) {
+            promise.reject(errorResponse);
+        });
+
+        return promise.promise;
+
+
       }
 
       /**
@@ -151,7 +166,6 @@
         return promise.promise;
       }
 
-     
 
       /**
        * @loghen41 allows the controller to get the selectedRecipe variable in the service
@@ -217,7 +231,6 @@
       function setSelectedRecipe(recipe) {
         selectedRecipe = recipe;
       }
-
 
 
     })

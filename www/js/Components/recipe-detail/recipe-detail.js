@@ -75,6 +75,7 @@
       recipesService.deleteRecipe(recipe)
         .then(
           function (successResponse) {
+            $state.go('tabs.myRecipes');
             console.log(successResponse)
           },
           function (errorResponse) {
