@@ -50,6 +50,10 @@
           url: '/browseOnline',
           template: '<browse-online></browse-online>'
         })
+        .state('tabs.feedback', {
+          url: '/feedback',
+          template: '<feedback></feedback>'
+        })
         .state('tabs.home', {
           url: '/home',
           template: '<home></home>'

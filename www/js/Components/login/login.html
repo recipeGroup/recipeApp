@@ -62,6 +62,7 @@
     <!-- This is the logout button, it is only displayed to the user once vm.user has been established-->
     <div class="loginDiv" ng-if="vm.user">
       <button class="button button-positive button-block" on-tap="vm.logout()">Logout</button>
+      <button class="button button-balanced button-block" ui-sref="tabs.feedback">Submit Feedback</button>
     </div>
   </ion-content>
 </ion-pane>
