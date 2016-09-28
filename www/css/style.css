@@ -48,18 +48,45 @@
 
 .detailName, .detailQuantity {
   text-align:center;
+  width: 30%;
 }
 
-#sillyInput {
-  width: 30px;
+.marginRight_5 {
+  margin-right: .5em;
 }
 
+/*
 .flex-row {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
   width: 100% !important;
+}
+*/
+
+.flex-row {
+  text-align: center;
+}
+
+.flex-row p {
+  display: inline-block;
+}
+
+.flex-row span {
+  display: inline-block;
+}
+
+.flex-row div {
+  display: inline-block;
+}
+
+.flex-row label {
+  display: inline-block;
+}
+
+.flex-row input {
+  display: inline-block;
 }
 
 .flex-column {
