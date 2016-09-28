@@ -1,6 +1,10 @@
 <ion-pane>
   <ion-header-bar class="bar-positive" align-title="center" ng-show="!vm.selectedRecipe">
-    <i ui-sref="tabs.profile" class="icon ion-person avatar"/></i>
+    <div style="text-align: center; margin-left: .2em;" ng-show="vm.user">
+      <i ng-show="!vm.user.photoURL" ui-sref="tabs.profile" class="icon ion-person avatar"/></i>
+      <img ng-show="vm.user.photoURL" ui-sref="tabs.profile" class="imgDName" ng-src="{{vm.user.photoURL}}">
+      <p class="avText">{{vm.displayName}}</p>
+    </div>
     <h1 class="title">My Recipes</h1>
   </ion-header-bar>
   <ion-content ng-show="!vm.recipes" class="flex-row has-header has-subheader" >

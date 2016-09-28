@@ -1,7 +1,11 @@
 <!--160922-0800_recipeApp_our-profile_html-->
 <ion-pane>
   <ion-header-bar class="bar-positive" align-title="center">
-    <i ui-sref="tabs.profile" class="icon ion-person avatar"/></i>
+    <div style="text-align: center; margin-left: .2em;" ng-show="vm.user">
+      <i ng-show="!vm.user.photoURL" ui-sref="tabs.profile" class="icon ion-person avatar"/></i>
+      <img ng-show="vm.user.photoURL" ui-sref="tabs.profile" class="imgDName" ng-src="{{vm.user.photoURL}}">
+      <p class="avText">{{vm.displayName}}</p>
+    </div>
     <h1 class="title">Profile</h1>
   </ion-header-bar>
 

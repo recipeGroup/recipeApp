@@ -7,7 +7,7 @@
         controller: browseOnlineController,
         controllerAs: 'vm'
       });
-    function browseOnlineController(apiCallsService) {
+    function browseOnlineController(apiCallsService, userService) {
       var vm = this;
       vm.$onInit = onInit;
       vm.onlineDetails = onlineDetails;
@@ -59,6 +59,27 @@
       function onInit() {
         apiCall(pageNumber);
       }
-
+  
+      userService.getProfile()
+                 .then(
+                   function (successResponse) {
+                     vm.user = successResponse;
+                     var str = vm.user.email;
+                     if (vm.user.displayName == null) {
+                       var aNum;
+                       aNum = str.indexOf("@");
+                       vm.displayName = str.substr(0, aNum);
+                     }
+                     else {
+                       vm.displayName = vm.user.displayName;
+                     }
+      
+                   },
+                   function (errorResponse) {
+      
+                   }
+                 );
+  
+  
     }
   })();

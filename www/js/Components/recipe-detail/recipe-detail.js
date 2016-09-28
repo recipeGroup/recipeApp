@@ -9,7 +9,7 @@
            }
          );
   //to connect to database and draw in selected recipe added authenticationService and recipesService
-  function recipeDetailController(recipesService, $state, toastService) {
+  function recipeDetailController(recipesService, userService, $state, toastService) {
     var vm = this;
     vm.$onInit = onInit;
     vm.addLine = addLine;
@@ -29,7 +29,28 @@
        */
       vm.selectedRecipe = recipesService.getSelectedRecipe();
     }
-
+  
+    userService.getProfile()
+               .then(
+                 function (successResponse) {
+                   vm.user = successResponse;
+                   var str = vm.user.email;
+                   if (vm.user.displayName == null) {
+                     var aNum;
+                     aNum = str.indexOf("@");
+                     vm.displayName = str.substr(0, aNum);
+                   }
+                   else {
+                     vm.displayName = vm.user.displayName;
+                   }
+      
+                 },
+                 function (errorResponse) {
+      
+                 }
+               );
+  
+  
     function saveRecipe(recipe) {
       recipesService.editRecipe(recipe)
                     .then(
