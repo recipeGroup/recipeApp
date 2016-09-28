@@ -31,7 +31,6 @@
         <input id="detailTitle" type="text" ng-model=vm.selectedRecipe.title>
       </ion-item>
       <ion-item ng-repeat="ingredient in vm.selectedRecipe.ingredients" class="flex-row">
-        <span>{{$index + 1}}. </span>
         <input class="detailQuantity" type="text" ng-model=ingredient.quantity placeholder="3 Cups">
         <span>|</span>
         <input class="detailName" type="text" ng-model=ingredient.name placeholder="Flour">

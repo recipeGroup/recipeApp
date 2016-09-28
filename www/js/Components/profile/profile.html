@@ -34,17 +34,11 @@
           <input type="email" name="username" ng-model="vm.data.email" ng-minlength="5" placeholder="email"
                  ng-disabled="true" required/>
         </label>
-        <ion-item class="flex-row">
-          <div>
-            <ion-radio ng-model="vm.data.gender" ng-value="'Male'">Male</ion-radio>
-          </div>
-          <div>
-            <ion-radio ng-model="vm.data.gender" ng-value="'Female'">Female</ion-radio>
-          </div>
-          <div>
-            <ion-radio ng-model="vm.data.gender" required ng-value="'Other'">Other</ion-radio>
-          </div>
-        </ion-item>
+        <ion-list>
+          <ion-radio ng-model="vm.data.gender" ng-value="'Male'">Male</ion-radio>
+          <ion-radio ng-model="vm.data.gender" ng-value="'Female'">Female</ion-radio>
+          <ion-radio ng-model="vm.data.gender" required ng-value="'Other'">Other</ion-radio>
+        </ion-list>
         <button class="button button-full button-positive"
                 ng-disabled="profileForm.$invalid || profileForm.$pristine" type="submit">Save Profile
         </button>
