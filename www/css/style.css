@@ -1,6 +1,5 @@
 .avatar {
   font-size: 2em;
-  margin: .2em;
 }
 
 #browseComponent {
@@ -63,8 +62,25 @@
   width: 100% !important;
 }
 
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100% !important;
+}
+
 .flex-row i {
   font-size: 2em;
 }
 
-
+.imgDName {
+  width:2em;
+  height:2em;
+  border-radius:50%;
+  margin-top: -.2em;
+}
+.avText{
+  font-size: .5em;
+  margin-top:-1em;
+}
