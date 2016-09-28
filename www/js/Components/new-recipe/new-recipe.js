@@ -11,6 +11,7 @@
 
     //Declaring variables to be used by this controller
     var vm = this;
+    var theUser;
     vm.recipe = {};
     vm.recipe.ingredients = [];
     vm.recipe.status = 'Public';
@@ -59,30 +60,29 @@
      * This checks with the authenticationService to ensure that the user is still logged in, so we can actually do the work we need to do.
      */
     function onInit() {
-      vm.user = userService.getUser();
+      theUser = userService.getUser();
+      userService.getProfile()
+        .then(
+          function (successResponse) {
+            vm.user = successResponse;
+            var str = vm.user.email;
+            if (vm.user.displayName == null) {
+              var aNum;
+              aNum = str.indexOf("@");
+              vm.displayName = str.substr(0, aNum);
+            }
+            else {
+              vm.displayName = vm.user.displayName;
+            }
+
+          },
+          function (errorResponse) {
+
+          }
+        );
   }
-  
-    userService.getProfile()
-               .then(
-                 function (successResponse) {
-                   vm.user = successResponse;
-                   var str = vm.user.email;
-                   if (vm.user.displayName == null) {
-                     var aNum;
-                     aNum = str.indexOf("@");
-                     vm.displayName = str.substr(0, aNum);
-                   }
-                   else {
-                     vm.displayName = vm.user.displayName;
-                   }
-      
-                 },
-                 function (errorResponse) {
-      
-                 }
-               );
-  
-  
+
+
     /**
      * @loghen41 this function requires a recipe to be passed to it, it assumes it will be the vm.recipe object we have been creating to this point
      * @loghen41 the object is then passed to the recipes.js controller, where it saves the recipe on the database
@@ -91,14 +91,20 @@
     function saveRecipe(recipe) {
 
       //we pass the recipe object to the recipesService to store the recipe on the database
-      recipesService.saveRecipe(vm.user, recipe);
+      recipesService.saveRecipe(theUser, recipe)
+        .then(
+          function() {
+            //We show a toast to the user that displays that the recipe has been created
+            toastService.showToast(vm.recipe.title + ' created!');
 
-      //We show a toast to the user that displays that the recipe has been created
-      toastService.showToast(vm.recipe.title + ' created!');
+            //We reset the recipe Object to prepare it for a new recipe
+            vm.recipe = {};
+            vm.recipe.status = 'Public';
+          },
+          function() {});
 
-      //We reset the recipe Object to prepare it for a new recipe
-      vm.recipe = {};
-      vm.recipe.status = 'private';
+
+
     }
 
   }

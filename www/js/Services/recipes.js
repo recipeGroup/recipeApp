@@ -191,6 +191,8 @@
        * @param recipe
        */
       function saveRecipe(user, recipe) {
+        var promise = $q.defer();
+        
         //var record is a local object that we are preparing to send to firebase, this is only done to take out the ingredients, and add in the user, and public variables
         var record = {
           title: recipe.title,
@@ -217,11 +219,14 @@
               for (var i = 0; i < recipe.ingredients.length; i++) {
                 ingredientsRef.$add(recipe.ingredients[i]);
               }
+              promise.resolve();
             },
             //This is a basic error catch in case the program breaks
             function (error) {
-              console.log(error)
-            })
+              console.log(error);
+              promise.reject();
+            });
+        return promise.promise;
       }
 
       /**
