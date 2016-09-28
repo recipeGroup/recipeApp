@@ -1,13 +1,11 @@
 <ion-pane>
   <!-- This is the header bar for the Login Page-->
   <ion-header-bar class="bar bar-header bar-positive" align-title="center">
-    <!--new  Header-->
     <div style="text-align: center; margin-left: .2em;" ng-show="vm.user">
       <i ng-show="!vm.user.photoURL" ui-sref="tabs.profile" class="icon ion-person avatar"/></i>
       <img ng-show="vm.user.photoURL" ui-sref="tabs.profile" class="imgDName" ng-src="{{vm.user.photoURL}}">
       <p class="avText">{{vm.displayName}}</p>
     </div>
-    <!-- Close of New Header -->
     <h1 class="title">Login</h1>
   </ion-header-bar>
 

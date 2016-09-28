@@ -7,7 +7,7 @@
         controller: browseAppController,
         controllerAs: 'vm'
       });
-    function browseAppController(recipesService) {
+    function browseAppController(recipesService, userService) {
       var vm = this;
       vm.$onInit = onInit;
       vm.selectRecipe = selectRecipe;
@@ -27,6 +27,26 @@
             function (errorResponse) {
               console.log(errorResponse);
             });
+        userService.getProfile()
+                   .then(
+                     function (successResponse) {
+                       vm.user = successResponse;
+                       var str = vm.user.email;
+                       if (vm.user.displayName == null) {
+                         var aNum;
+                         aNum = str.indexOf("@");
+                         vm.displayName = str.substr(0, aNum);
+                       }
+                       else {
+                         vm.displayName = vm.user.displayName;
+                       }
+      
+                     },
+                     function (errorResponse) {
+      
+                     }
+                   );
+  
       }
 
       function saveToProfile(selectedRecipe) {

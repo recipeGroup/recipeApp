@@ -61,7 +61,28 @@
     function onInit() {
       vm.user = userService.getUser();
   }
-
+  
+    userService.getProfile()
+               .then(
+                 function (successResponse) {
+                   vm.user = successResponse;
+                   var str = vm.user.email;
+                   if (vm.user.displayName == null) {
+                     var aNum;
+                     aNum = str.indexOf("@");
+                     vm.displayName = str.substr(0, aNum);
+                   }
+                   else {
+                     vm.displayName = vm.user.displayName;
+                   }
+      
+                 },
+                 function (errorResponse) {
+      
+                 }
+               );
+  
+  
     /**
      * @loghen41 this function requires a recipe to be passed to it, it assumes it will be the vm.recipe object we have been creating to this point
      * @loghen41 the object is then passed to the recipes.js controller, where it saves the recipe on the database
