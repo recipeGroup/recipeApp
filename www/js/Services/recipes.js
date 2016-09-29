@@ -16,7 +16,14 @@
       this.setSelectedRecipe = setSelectedRecipe;
       this.deleteRecipe = deleteRecipe;
 
+      
+      //Functions for use in the Service
 
+      /**
+       * @loghen41 addIngredient() recipes a recipe, and adds an ingredient to it in the database
+       * @param recipeObject
+       * @returns {Promise}
+         */
       function addIngredient(recipeObject) {
         var promise = $q.defer();
 
@@ -48,6 +55,12 @@
         return promise.promise;
       }
 
+        /**
+         * @loghen41 deleteIngredient() deletes an ingredient in the database
+         * @param recipeObject
+         * @param index
+         * @returns {Promise}
+         */
       function deleteIngredient(recipeObject, index) {
         var promise = $q.defer();
         editRecipe(recipeObject)
@@ -84,8 +97,6 @@
         });
 
         return promise.promise;
-
-
       }
 
       /**
@@ -128,6 +139,10 @@
 
       }
 
+      /**
+       * getAppRecipes() gets all of the public recipes built by the App
+       * @returns {Promise}
+         */
       function getAppRecipes() {
         var promise = $q.defer();
         var newRef = firebase.database().ref("recipes").orderByChild('status').equalTo('Public');
