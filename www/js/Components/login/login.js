@@ -9,7 +9,7 @@
            }
          );
   function loginController(authenticationService, toastService, $state, userService) {
-    
+
     var vm = this;
     vm.$onInit = onInit;
     vm.createEmailLogin = createEmailLogin;
@@ -17,7 +17,7 @@
     vm.logout = logout;
     vm.showCreateEmailForm = showCreateEmailForm;
     vm.showEmailForm = showEmailForm;
-    
+
     /**
      * @loghen41 createEmailLogin() allows the user to establish a new login with an email and two passwords
      * @loghen41 the actual creation of the login is handled through authentication.js which speaks to firebase
@@ -44,12 +44,12 @@
                                  $state.go('tabs.home');
                                }, function (error) {
                                  toastService.showToast(error);
-            
+
                                }
                              )
       }
     }
-    
+
     /**
      * @loghen41 login() can allow the user to login via a provider (facebook, google, etc..) or via email and password
      * @loghen41 the actual login process is handled by authentication.js
@@ -58,11 +58,11 @@
      * @param password
      */
     function login(provider, email, password) {
-      
+
       if (vm.showTheEmailForm) {
         vm.showTheEmailForm = false;
       }
-      
+
       authenticationService.login(provider, email, password)
                            .then(
                              function () {
@@ -80,7 +80,7 @@
                              }
                            )
     }
-    
+
     /**
      * @loghen41 logout() does not require params, it is merely called and it will log the user out of the system
      */
@@ -91,38 +91,40 @@
       else {
         toastService.showToast(vm.user.email + " logged out!");
       }
-      
+
       authenticationService.logout();
       delete vm.user;
     }
-    
+
     /**
      * @loghen41 onInit() is called once the controller is loaded, and calls authenticationService.initialCheck() to see if the user exists and route the page accordingly
      */
     function onInit() {
       // New Init Service to get Profile
-      userService.getProfile()
-                 .then(
-                   function (successResponse) {
-                     vm.user = successResponse;
-                     var str = vm.user.email;
-                     if (vm.user.displayName == null) {
-                       var aNum;
-                       aNum = str.indexOf("@");
-                       vm.displayName = str.substr(0, aNum);
-                     }
-                     else {
-                       vm.displayName = vm.user.displayName;
-                     }
-          
-                   },
-                   function (errorResponse) {
-          
-                   }
-                 );
+      if(vm.user) {
+        userService.getProfile()
+          .then(
+            function (successResponse) {
+              vm.user = successResponse;
+              var str = vm.user.email;
+              if (vm.user.displayName == null) {
+                var aNum;
+                aNum = str.indexOf("@");
+                vm.displayName = str.substr(0, aNum);
+              }
+              else {
+                vm.displayName = vm.user.displayName;
+              }
+
+            },
+            function (errorResponse) {
+
+            }
+          );
+      }
       //End of New Init Service to Get Profile
     }
-    
+
     /**
      * @loghen41 showCreateEmailForm() shows the createEmailForm when called
      */
@@ -130,13 +132,13 @@
       vm.showTheEmailForm = false;
       vm.showTheCreateEmailForm = true;
     }
-    
+
     /**
      * @loghen41 showEmailForm() shows the emailForm when called
      */
     function showEmailForm() {
       vm.showTheEmailForm = true;
     }
-    
+
   }
 })();
