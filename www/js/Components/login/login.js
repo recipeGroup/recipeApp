@@ -9,9 +9,10 @@
            }
          );
   function loginController(authenticationService, toastService, $state, userService) {
-
+//Local variables
     var vm = this;
     var theUser;
+    //Public variables
     vm.$onInit = onInit;
     vm.createEmailLogin = createEmailLogin;
     vm.login = login;
@@ -72,7 +73,7 @@
                                  toastService.showToast(vm.user.displayName + " Logged In!");
                                }
                                else {
-                                 toastService.showToast(vm.user.email + " logged in!");
+                                 toastService.showToast(vm.user.email + " Logged in!");
                                }
                                $state.go('tabs.home');
                              },
