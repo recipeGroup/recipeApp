@@ -11,8 +11,10 @@
   function newRecipeController(userService, recipesService, toastService) {
 
     //Declaring variables to be used by this controller
+    //Local variables
     var vm = this;
     var theUser;
+    //Public variables
     vm.recipe = {};
     vm.recipe.ingredients = [];
     vm.recipe.status = 'Public';

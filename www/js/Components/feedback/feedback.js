@@ -1,4 +1,3 @@
-//160928 - recipeApp_feedback_html
 (function () {
   angular.module('app')
     .component(
@@ -8,12 +7,15 @@
         controller: feedbackController,
         controllerAs: 'vm'
       });
-  function feedbackController($firebaseArray, toastService,
-                              $state, userService) {
+  function feedbackController($firebaseArray, toastService, $state, userService) {
+    //Local variables
     var vm = this;
+    //Public variables
     vm.$onInit = onInit;
     vm.saveFeedback = saveFeedback;
-
+    /**
+       * @tyeren gets user profile/ID to display users email or profile name
+     */
     function onInit() {
       userService.getProfile()
         .then(
@@ -36,6 +38,10 @@
         );
     }
 
+    /**
+     * @tyeren saves user created feedback (text feedback and/or 1-5 rating) to firebase
+     * @param feedback
+       */
     function saveFeedback(feedback) {
       if (!feedback.rating) {
         toastService.showToast('Please Select A rating for our App!');

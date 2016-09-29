@@ -16,29 +16,10 @@
       this.onUpdate = onUpdate;
       this.setUser = setUser;
       this.saveProfile = saveProfile;
-
-      function getUser() {
-        return user;
-      }
-
-      function setUser(theUser) {
-        user = theUser;
-        update(user);
-      }
-
-      function update(user) {
-        registeredFunctions.forEach(function (element) {
-          element(user);
-        });
-      }
-
-      function onUpdate(param) {
-        if (typeof param === 'function') {
-          registeredFunctions.push(param);
-        }
-        update(user);
-      }
-
+      /**
+       * @tyeren gets the firebase user id so we can use specfic user ids thru out the app
+       * @returns {Promise}
+         */
       function getProfile() {
         var promise = $q.defer();
         if(user) {
@@ -50,15 +31,57 @@
             function (errorResponse) {
               promise.reject(errorResponse);
             });
-        } else 
+        } else
         {
           promise.reject('No User Defined')
         }
         return promise.promise;
       }
 
+      /**
+       * @tyeren returns the defined user object
+       * @returns {*}
+         */
+      function getUser() {
+        return user;
+      }
+
+      /**
+       * @tyeren saves the defined user id so we can save updated information to firebase
+       * @param data
+         */
       function saveProfile(data) {
         var ref = firebase.database().ref('users/' + user.uid).update(data);
+      }
+
+      /**
+       * @tyeren allows controller to set local user to current user
+       * @param theUser
+         */
+      function setUser(theUser) {
+        user = theUser;
+        update(user);
+      }
+
+      /**
+       * @tyeren allows a controller to register itself to be updated by the service
+       * @param param
+         */
+      function onUpdate(param) {
+        if (typeof param === 'function') {
+          registeredFunctions.push(param);
+        }
+        update(user);
+      }
+
+      /**
+       * @tyeren updates all of the registered controllers with the data they neeed
+       * @param user
+         */
+      function update(user) {
+        registeredFunctions.forEach(function (element) {
+          element(user);
+        });
       }
 
       $rootScope.$on('$stateChangeStart',
