@@ -1,4 +1,4 @@
-// 160922-0800_recipeApp_our-profile_js
+//160928-recipeApp_profile_js
 (function () {
   angular.module('app')
     .component(

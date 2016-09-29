@@ -1,3 +1,4 @@
+//160928-recipeApp_Services_user_js
 (function () {
   angular.module('app')
     .service('userService', function ($state, $rootScope, $q) {
