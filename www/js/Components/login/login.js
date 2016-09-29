@@ -11,6 +11,7 @@
   function loginController(authenticationService, toastService, $state, userService) {
 
     var vm = this;
+    var theUser;
     vm.$onInit = onInit;
     vm.createEmailLogin = createEmailLogin;
     vm.login = login;
@@ -101,7 +102,7 @@
      */
     function onInit() {
       // New Init Service to get Profile
-      if(vm.user) {
+
         userService.getProfile()
           .then(
             function (successResponse) {
@@ -112,16 +113,16 @@
                 aNum = str.indexOf("@");
                 vm.displayName = str.substr(0, aNum);
               }
+
               else {
                 vm.displayName = vm.user.displayName;
               }
-
             },
             function (errorResponse) {
-
+              console.log(errorResponse);
             }
           );
-      }
+
       //End of New Init Service to Get Profile
     }
 
