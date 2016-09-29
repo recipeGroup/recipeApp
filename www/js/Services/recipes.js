@@ -17,9 +17,8 @@
       this.setSelectedRecipe = setSelectedRecipe;
       this.deleteRecipe = deleteRecipe;
 
-      
-      //Functions for use in the Service
 
+      //Functions for use in the Service
       /**
        * @loghen41 addIngredient() recipes a recipe, and adds an ingredient to it in the database
        * @param recipeObject
@@ -246,7 +245,7 @@
       }
 
       /**
-       * @loghen41 allows a controller to set the selectedRecipe variable in the service
+       * @loghen41 allows a controller to set the selectedRecipe variable in the service for other controllers to see
        * @param recipe
        */
       function setSelectedRecipe(recipe) {
