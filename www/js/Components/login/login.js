@@ -9,9 +9,10 @@
            }
          );
   function loginController(authenticationService, toastService, $state, userService) {
-
+//Local variables
     var vm = this;
     var theUser;
+    //Public variables
     vm.$onInit = onInit;
     vm.createEmailLogin = createEmailLogin;
     vm.login = login;

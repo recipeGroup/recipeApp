@@ -10,10 +10,14 @@
       });
 
   function profileController(userService, toastService, $scope) {
+    // Declares Local variables
     var vm = this;
+    //Declares Public variables
     vm.$onInit = onInit;
     vm.saveProfile = saveProfile;
-
+    /**
+       * @tyeren grabs user profile to display avatar
+     */
     function onInit () {
       userService.getProfile()
         .then(
@@ -45,9 +49,13 @@
   
     }
 
+    /**
+     * saves users profile and displays profile saved toast
+     * @param user
+       */
     function saveProfile (user) {
       userService.saveProfile(user);
-      toastService.showToast(user.displayName + 'profiled saved!');
+      toastService.showToast(user.displayName + 'profile saved!');
     }
   }
 })();

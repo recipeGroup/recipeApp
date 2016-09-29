@@ -48,8 +48,11 @@
       
                    }
                  );
-  
-  
+
+      /**
+       * @tyeren gets user specific created recipes to display
+       * @param userId
+         */
       function getRecipes(userId) {
 
         recipesService.getRecipes(userId)
@@ -61,6 +64,10 @@
           });
       }
 
+      /**
+       * @tyeren changes view to users selected recipe
+       * @param recipe
+         */
       function goToThisRecipe(recipe) {
         //Day 4, Thu- connect recipe values to recipesService
         recipesService.setSelectedRecipe(recipe);
