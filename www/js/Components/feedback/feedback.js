@@ -1,3 +1,4 @@
+//160928 - recipeApp_feedback_html
 (function () {
   angular.module('app')
     .component(
@@ -7,7 +8,8 @@
         controller: feedbackController,
         controllerAs: 'vm'
       });
-  function feedbackController($firebaseArray, toastService, $state, userService) {
+  function feedbackController($firebaseArray, toastService,
+                              $state, userService) {
     var vm = this;
     vm.$onInit = onInit;
     vm.saveFeedback = saveFeedback;

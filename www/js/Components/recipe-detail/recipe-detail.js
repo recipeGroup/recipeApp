@@ -1,3 +1,4 @@
+//160928-recipeApp_recipe-detail_js
 (function () {
   angular.module('app')
          .component(

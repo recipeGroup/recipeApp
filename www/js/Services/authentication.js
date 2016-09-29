@@ -1,3 +1,4 @@
+//160928-recipeApp_Services_authentication_js
 (function () {
   angular.module('app')
     .service('authenticationService', function ($sessionStorage, $localStorage, $firebaseObject, $firebaseAuth, $q, $state, userService) {

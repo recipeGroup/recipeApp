@@ -1,3 +1,4 @@
+//160928-recipeApp_js_config_js
 (function() {
   
   //This config establishes the connection with firebase, in particular we are connected to the matcgroupapp@gmail.com firebase app GroupApp

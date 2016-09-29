@@ -1,3 +1,4 @@
+//160928-recipeApp_my-recipes_js
 (function() {
   angular.module('app')
     .component(
@@ -30,28 +31,25 @@
       }
   
       userService.getProfile()
-                 .then(
-                   function (successResponse) {
-                     vm.user = successResponse;
-                     var str = vm.user.email;
-                     if (vm.user.displayName == null) {
-                       var aNum;
-                       aNum = str.indexOf("@");
-                       vm.displayName = str.substr(0, aNum);
-                     }
-                     else {
-                       vm.displayName = vm.user.displayName;
-                     }
-      
-                   },
-                   function (errorResponse) {
-      
-                   }
-                 );
+       .then(
+         function (successResponse) {
+           vm.user = successResponse;
+           var str = vm.user.email;
+           if (vm.user.displayName == null) {
+             var aNum;
+             aNum = str.indexOf("@");
+             vm.displayName = str.substr(0, aNum);
+           }
+           else {
+             vm.displayName = vm.user.displayName;
+           }
+         },
+         function (errorResponse) {
+         }
+       );
   
   
       function getRecipes(userId) {
-
         recipesService.getRecipes(userId)
           .then(function(successResponse) {
             vm.recipes = successResponse;
@@ -69,5 +67,4 @@
         $state.go('tabs.recipeDetail');
       }
     }
-
   })();
