@@ -21,7 +21,8 @@
       //The tabs state is the parent state for the app, it is displayed in the ion-nav-view in the index
         .state('tabs', {
           url: '/tabs',
-          template: '<tabs></tabs>'
+          template: '<tabs></tabs>',
+          abstract: true
         })
 
         //The following states are children to the tabs state, they can only be viewed through the ion-nav-view located in the tabs component

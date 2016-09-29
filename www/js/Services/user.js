@@ -40,14 +40,19 @@
 
       function getProfile() {
         var promise = $q.defer();
-        firebase.database().ref('users/' + user.uid)
-          .once('value').then(
+        if(user) {
+          firebase.database().ref('users/' + user.uid)
+            .once('value').then(
             function (snapshot) {
               promise.resolve(snapshot.val());
             },
-        function (errorResponse) {
-          promise.reject(errorResponse);
-        });
+            function (errorResponse) {
+              promise.reject(errorResponse);
+            });
+        } else 
+        {
+          promise.reject('No User Defined')
+        }
         return promise.promise;
       }
 
