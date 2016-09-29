@@ -72,7 +72,7 @@
                                  toastService.showToast(vm.user.displayName + " Logged In!");
                                }
                                else {
-                                 toastService.showToast(vm.user.email + " logged in!");
+                                 toastService.showToast(vm.user.email + " Logged in!");
                                }
                                $state.go('tabs.home');
                              },
