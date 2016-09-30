@@ -32,7 +32,7 @@
        */
       vm.selectedRecipe = recipesService.getSelectedRecipe();
     }
-  
+
     userService.getProfile()
                .then(
                  function (successResponse) {
@@ -46,10 +46,10 @@
                    else {
                      vm.displayName = vm.user.displayName;
                    }
-      
+
                  },
                  function (errorResponse) {
-      
+
                  }
                );
 
@@ -94,7 +94,7 @@
         .then(
           function (successResponse) {
             $state.go('tabs.myRecipes');
-            console.log(successResponse)
+            toastService.showToast('Recipe Deleted');
           },
           function (errorResponse) {
             console.log(errorResponse)
