@@ -61,7 +61,15 @@
      */
     function login(provider, email, password) {
 
-      if (vm.showTheEmailForm) {
+      if(vm.showTheEmailForm && !email ) {
+        toastService.showToast('Please Provide a Valid Email');
+      }
+
+      if(vm.showTheEmailForm && !password ) {
+        toastService.showToast('Please Provide a Valid Password');
+      }
+
+      if (vm.showTheEmailForm && email && password) {
         vm.showTheEmailForm = false;
       }
 
@@ -140,6 +148,7 @@
      */
     function showEmailForm() {
       vm.showTheEmailForm = true;
+      vm.showTheCreateEmailForm = false;
     }
 
   }

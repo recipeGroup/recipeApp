@@ -35,7 +35,7 @@
          */
       function getRecipe(recipeId) {
         var promise = $q.defer();
-        
+
         $http ({
           method: 'GET',
           url: 'http://food2fork.com/api/get',
