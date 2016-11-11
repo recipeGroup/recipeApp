@@ -4,9 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
 var index = require('./routes/index');
-var users = require('./routes/user');
+var user = require('./routes/user');
 var recipe = require('./routes/recipe');
 var feedback = require('./routes/feedback');
 
@@ -25,7 +24,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-//app.use('/users', users);
+//app.use('/user', user);
 
 // catch 404 and forward to error handler
 app.use(
@@ -67,10 +66,6 @@ app.use(
     );
   }
 );
-
-app.listen(3000, function () {
-   console.log("Listening on Port 3000");
-});
 
 module.exports = app;
 
