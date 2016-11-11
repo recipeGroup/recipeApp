@@ -5,7 +5,6 @@
     //Current Dependenies are ionic, firebase, and ngStorage
     [
       'ionic',
-      'firebase',
       'ngStorage'])
 
 //This is the configuaration for the entire 'app' module

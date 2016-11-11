@@ -1,7 +1,7 @@
 //160928-recipeApp_Services_recipes_js
 (function () {
   angular.module('app')
-    .service('recipesService', function ($firebaseObject, $firebaseArray, $q) {
+    .service('recipesService', function (  $q) {
 
       //Declaring Variables for use in the service
       var selectedRecipe;
@@ -31,27 +31,7 @@
           name: '',
           quantity: ''
         };
-
-        editRecipe(recipeObject)
-          .then(function (successResponse) {
-            successResponse.$add(newIngredient)
-              .then(
-                function () {
-                  redefineArray(recipeObject.$id)
-                    .then(
-                      function (successResponse) {
-                        promise.resolve(successResponse);
-                      },
-                      function (errorResponse) {
-                        promise.reject(errorResponse);
-                      }
-                    )
-                },
-                function (errorResponse) {
-                  console.log(errorResponse)
-                });
-          });
-
+        
         return promise.promise;
       }
 
@@ -63,39 +43,13 @@
          */
       function deleteIngredient(recipeObject, index) {
         var promise = $q.defer();
-        editRecipe(recipeObject)
-          .then(function (successResponse) {
-            successResponse.$remove(index)
-              .then(
-                function () {
-                  redefineArray(recipeObject.$id)
-                    .then(
-                      function (successResponse) {
-                        promise.resolve(successResponse);
-                      },
-                      function (errorResponse) {
-                        promise.reject(errorResponse);
-                      }
-                    )
-                },
-                function (errorResponse) {
-                  console.log(errorResponse)
-                });
-          });
-
 
         return promise.promise;
       }
 
       function deleteRecipe(recipe) {
         var promise = $q.defer();
-        firebase.database().ref("recipes/" + recipe.$id).remove()
-          .then(function (successResponse) {
-            promise.resolve(successResponse)
-          }, function (errorResponse) {
-            promise.reject(errorResponse);
-        });
-
+       
         return promise.promise;
       }
 
@@ -114,27 +68,7 @@
           directions: recipe.directions,
           status: recipe.status
         };
-
-        //var ref is a firebase reference to the recipes table
-        var ref = firebase.database().ref("recipes");
-
-        //we access the individual recipe we wish to update through ref.child(recipe.$id)
-        ref.child(recipe.$id).update(record);
-
-        if (!recipe.ingredients.hasOwnProperty('$save')) {
-          var ingredientsRef = $firebaseArray(ref.child(recipe.$id + "/ingredients"));
-          ingredientsRef.forEach(function (element) {
-            ingredientsRef.$save(element);
-          });
-        }
-        else {
-          //We now loop through all of the ingredients on the recipe.ingredients array to save them to the database
-          recipe.ingredients.forEach(function (element) {
-            recipe.ingredients.$save(element);
-          });
-        }
-        promise.resolve(redefineArray(recipe.$id));
-        //we Return the $q object by saying return promise.promise
+        
         return promise.promise;
 
       }
@@ -145,39 +79,13 @@
          */
       function getAppRecipes() {
         var promise = $q.defer();
-        var newRef = firebase.database().ref("recipes").orderByChild('status').equalTo('Public');
-        var userRecipes = $firebaseArray(newRef);
-        userRecipes.$loaded(
-          function (successResponse) {
-            successResponse.forEach(function (arrayNode) {
-              var ref = firebase.database().ref('recipes/' + arrayNode.$id + '/ingredients');
-              arrayNode.ingredients = $firebaseArray(ref);
-              return arrayNode;
-            });
-            promise.resolve(successResponse);
-          },
-          function (errorResponse) {
-            promise.reject(errorResponse);
-          });
+        
         return promise.promise;
       }
 
       function getRecipes(userId) {
         var promise = $q.defer();
-        var newRef = firebase.database().ref("recipes").orderByChild('user').equalTo(userId);
-        var userRecipes = $firebaseArray(newRef);
-        userRecipes.$loaded(
-          function (successResponse) {
-            successResponse.forEach(function (arrayNode) {
-              var ref = firebase.database().ref('recipes/' + arrayNode.$id + '/ingredients');
-              arrayNode.ingredients = $firebaseArray(ref);
-              return arrayNode;
-            });
-            promise.resolve(successResponse);
-          },
-          function (errorResponse) {
-            promise.reject(errorResponse);
-          });
+       
         return promise.promise;
       }
 
@@ -189,16 +97,7 @@
       function getSelectedRecipe() {
         return selectedRecipe;
       }
-
-      function redefineArray(recipeId) {
-        var promise = $q.defer();
-
-        var ref = firebase.database().ref('recipes/' + recipeId + '/ingredients');
-        var ingredientsArray = $firebaseArray(ref);
-        promise.resolve(ingredientsArray);
-        promise.reject('error');
-        return promise.promise;
-      }
+      
 
       /**
        * @loghen41 saveRecipe() allows the user to save a brand new recipe
@@ -215,32 +114,7 @@
           status: recipe.status,
           user: user.uid
         };
-
-        //var ref is a reference to the recipes table on the database using standard firebase
-        var ref = firebase.database().ref("recipes");
-        //var recipesRef is a firebaseArray of the recipes table created from AngularFire
-        var recipesRef = $firebaseArray(ref);
-
-        //$add is a function on a firebaseArray, we are using $add to add the individual recipe to the recipes table
-        recipesRef.$add(record)
-          .then(
-            //once the recipe has been created, we need to add the ingredients to the recipe in their own firebaseArray
-            function (successResponse) {
-              //var newRef gets a reference in the recipes table to the specific recipe we have just created using the firebase connection
-              var newRef = firebase.database().ref("recipes").child(successResponse.key).child('ingredients');
-              //var ingredientsRef takes the reference to the ingredients key on the newly made recipe, and it turns it into a firebaseArray using AngularFire
-              var ingredientsRef = $firebaseArray(newRef);
-              //for each ingredient in our local array, we add it to the firebaseArray, and updload it to the database
-              for (var i = 0; i < recipe.ingredients.length; i++) {
-                ingredientsRef.$add(recipe.ingredients[i]);
-              }
-              promise.resolve();
-            },
-            //This is a basic error catch in case the program breaks
-            function (error) {
-              console.log(error);
-              promise.reject();
-            });
+        
         return promise.promise;
       }
 

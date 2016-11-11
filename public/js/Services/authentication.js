@@ -1,7 +1,7 @@
 //160928-recipeApp_Services_authentication_js
 (function () {
   angular.module('app')
-    .service('authenticationService', function ($sessionStorage, $localStorage, $firebaseObject, $firebaseAuth, $q, $state, userService) {
+    .service('authenticationService', function ($sessionStorage, $localStorage,  $q, $state, userService) {
 
       this.login = login;
       this.logout = logout;
@@ -16,30 +16,8 @@
          * @returns {Promise}
          */
       function createUserFromEmail(email, password) {
-        var auth = $firebaseAuth();
+        
         var promise = $q.defer();
-
-        auth.$createUserWithEmailAndPassword(email, password)
-          .then(function (firebaseUser) {
-            var ref = firebase.database().ref("users");
-            var profileRef = ref.child(firebaseUser.uid);
-            var theUser = $firebaseObject(profileRef);
-            var userStorage = window.localStorage.getItem('firebase:authUser:AIzaSyDtNbp-weG3kHrkLuhl6f9Ymy5JMQ0F8W8:[DEFAULT]');
-            var user = JSON.parse(userStorage);
-            userService.setUser(user);
-
-            theUser.$loaded().then(
-              profileRef.set({
-                displayName: firebaseUser.displayName,
-                email: firebaseUser.email,
-                photoURL: firebaseUser.photoURL
-              })
-            );
-            promise.resolve();
-          })
-          .catch(function (creationError) {
-            promise.reject(creationError)
-          });
 
         return promise.promise;
 
@@ -55,55 +33,10 @@
          * @returns {Promise}
          */
       function login(provider, email, password) {
-
-        var auth = $firebaseAuth();
+        
 
         var promise = $q.defer();
-
-        if (email && password) {
-
-          auth.$signInWithEmailAndPassword(email, password)
-            .then(function (loginSuccess) {
-              var userStorage = window.localStorage.getItem('firebase:authUser:AIzaSyDtNbp-weG3kHrkLuhl6f9Ymy5JMQ0F8W8:[DEFAULT]');
-              var user = JSON.parse(userStorage);
-              userService.setUser(user);
-              promise.resolve();
-            })
-            .catch(function (loginError) {
-              promise.reject(loginError);
-            })
-
-        }
-
-        else {
-
-          auth.$signInWithPopup(provider)
-
-            .then(function (firebaseUser) {
-              var userStorage = window.localStorage.getItem('firebase:authUser:AIzaSyDtNbp-weG3kHrkLuhl6f9Ymy5JMQ0F8W8:[DEFAULT]');
-              var user = JSON.parse(userStorage);
-              userService.setUser(user);
-              var ref = firebase.database().ref("users");
-              var profileRef = ref.child(firebaseUser.user.uid);
-              var theUser = $firebaseObject(profileRef);
-
-              theUser.$loaded().then(function () {
-                  if (!theUser.displayName) {
-                    profileRef.set({
-                      displayName: firebaseUser.user.displayName,
-                      email: firebaseUser.user.email,
-                      photoURL: firebaseUser.user.photoURL
-                    })
-                  }
-                }
-              );
-               $state.reload('tabs');
-              promise.resolve();
-            }).catch(function (error) {
-            promise.reject(error);
-          });
-
-        }
+        
         return promise.promise;
       }
 
@@ -112,8 +45,6 @@
        * @returns {undefined|*}
          */
       function logout() {
-        var auth = $firebaseAuth();
-        auth.$signOut();
         var user = undefined;
         userService.setUser(user);
         $state.go('tabs.login');

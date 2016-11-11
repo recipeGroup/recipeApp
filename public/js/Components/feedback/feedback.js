@@ -7,7 +7,7 @@
         controller: feedbackController,
         controllerAs: 'vm'
       });
-  function feedbackController($firebaseArray, toastService, $state, userService) {
+  function feedbackController( toastService, $state, userService) {
     //Local variables
     var vm = this;
     //Public variables
@@ -47,20 +47,6 @@
         toastService.showToast('Please Select A rating for our App!');
       }
       else {
-        var ref = firebase.database().ref("feedback");
-        var feedbackRef = $firebaseArray(ref);
-        feedbackRef.$add(feedback)
-          .then(
-            function (successResponse) {
-              toastService.showToast('Thank You for your Feedback!');
-              vm.feedback = {};
-              $state.go("tabs.login")
-
-            },
-            function (errorResponse) {
-              console.log(errorResponse)
-            }
-          )
       }
     }
   }
