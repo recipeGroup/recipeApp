@@ -221,7 +221,7 @@
         //var recipesRef is a firebaseArray of the recipes table created from AngularFire
         var recipesRef = $firebaseArray(ref);
 
-        //$add is a function on a firebaseArray, we are using $add to add the inidividual recipe to the recipes table
+        //$add is a function on a firebaseArray, we are using $add to add the individual recipe to the recipes table
         recipesRef.$add(record)
           .then(
             //once the recipe has been created, we need to add the ingredients to the recipe in their own firebaseArray
@@ -251,7 +251,5 @@
       function setSelectedRecipe(recipe) {
         selectedRecipe = recipe;
       }
-
-
     })
 })();
