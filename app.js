@@ -14,6 +14,7 @@ var app = express();
 
 mongoose.connect('mongodb://localhost/recipEvil');
 
+console.log('test');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
