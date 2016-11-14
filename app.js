@@ -8,8 +8,13 @@ var index = require('./routes/index');
 var user = require('./routes/user');
 var recipe = require('./routes/recipe');
 var feedback = require('./routes/feedback');
+var mongoose = require('mongoose');
 
 var app = express();
+
+mongoose.connect('mongodb://localhost/recipEvil');
+
+console.log('test');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
