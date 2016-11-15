@@ -33,7 +33,7 @@ var feedback = new Schema ({
 
 
 module.exports = {
-  Recipe: mongoose.mode('recipe', recipe),
-  User: mongoose.mode('user', user),
-  Feedback: mongoose.mode('feedback', feedback)
+  Recipe: mongoose.model('recipe', recipe),
+  User: mongoose.model('user', user),
+  Feedback: mongoose.model('feedback', feedback)
 };
