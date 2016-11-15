@@ -1,7 +1,7 @@
 //160928-recipeApp_Services_authentication_js
 (function () {
   angular.module('app')
-    .service('authenticationService', function ($sessionStorage, $localStorage,  $q, $state, userService) {
+    .service('authenticationService', function ($sessionStorage, $localStorage,  $q, $state, userService, $http) {
 
       this.login = login;
       this.logout = logout;
@@ -19,6 +19,28 @@
         
         var promise = $q.defer();
 
+        var record = {
+          name_first: '',
+          name_last: '',
+          displayName: '',
+          photoURL: '',
+          email: email,
+          password: password,
+          gender: 'Other'
+        };
+        
+        
+        $http({
+          method: 'POST',
+          url: '/user/create',
+          data: record
+              })
+          .then(function(success) {
+                        console.log(success);
+          }, function(error) {
+                      console.log(error);
+          });
+        
         return promise.promise;
 
       }
