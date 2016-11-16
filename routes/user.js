@@ -25,9 +25,32 @@ router.post('/create', function (req, res, next) {
   })
 });
 
+//-------------------------------------------------------
 router.post('/login', function (req, res, next) {
+  }
+);
+https://scotch.io/tutorials/learn-to-use-the-new-router-in-expressjs-4
+
+// ROUTES
+// ==============================================
   
-});
+  app.route('/login')
+     // show the form (GET http://localhost:8080/login)
+     .get(
+       function (req, res) {
+         res.send('this is the login form');
+       }
+     )
+  
+     // process the form (POST http://localhost:8080/login)
+     .post(
+       function (req, res) {
+         console.log('processing');
+         res.send('processing the login form!');
+       }
+     );
+
+//-------------------------------------------------------
 
 router.post('/logout', function (req, res, next) {
 
