@@ -1,13 +1,5 @@
 <ion-pane>
-  <!-- browse public recipes -->
-  <ion-header-bar class="bar-positive" align-title="center">
-    <div style="text-align: center; margin-left: .2em;" ng-show="vm.user">
-      <i ng-show="!vm.user.photoURL" ui-sref="tabs.profile" class="icon ion-person avatar"/></i>
-      <img ng-show="vm.user.photoURL" ui-sref="tabs.profile" class="imgDName" ng-src="{{vm.user.photoURL}}">
-      <!-- displays vm.displayName extracted from function onInit() in browseController -->
-      <p class="avText">{{vm.displayName}}</p>
-    </div>
-  </ion-header-bar>
+
   <ion-content ng-show="!vm.appRecipes" class="flex-row has-header has-subheader">
     <ion-spinner ></ion-spinner>
   </ion-content>
