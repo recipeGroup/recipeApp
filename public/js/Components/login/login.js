@@ -11,7 +11,6 @@
   function loginController(authenticationService, toastService, $state, userService) {
 //Local variables
     var vm = this;
-    var theUser;
     //Public variables
     vm.$onInit = onInit;
     vm.createEmailLogin = createEmailLogin;
@@ -59,7 +58,7 @@
      * @param email
      * @param password
      */
-    function login(provider, email, password) {
+    function login(email, password) {
 
       if(vm.showTheEmailForm && !email ) {
         toastService.showToast('Please Provide a Valid Email');
@@ -73,7 +72,7 @@
         vm.showTheEmailForm = false;
       }
 
-      authenticationService.login(provider, email, password)
+      authenticationService.login(email, password)
                            .then(
                              function () {
                                vm.user = userService.getUser();
@@ -110,29 +109,8 @@
      * @loghen41 onInit() is called once the controller is loaded, and calls authenticationService.initialCheck() to see if the user exists and route the page accordingly
      */
     function onInit() {
-      // New Init Service to get Profile
+      vm.user = userService.getUser();
 
-        userService.getProfile()
-          .then(
-            function (successResponse) {
-              vm.user = successResponse;
-              var str = vm.user.email;
-              if (vm.user.displayName == null) {
-                var aNum;
-                aNum = str.indexOf("@");
-                vm.displayName = str.substr(0, aNum);
-              }
-
-              else {
-                vm.displayName = vm.user.displayName;
-              }
-            },
-            function (errorResponse) {
-              console.log(errorResponse);
-            }
-          );
-
-      //End of New Init Service to Get Profile
     }
 
     /**

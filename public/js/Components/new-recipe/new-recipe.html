@@ -1,14 +1,5 @@
 <!--160928-recipeApp_new-recipes_html-->
 <ion-pane>
-  <!-- This is the header bar for the New-Recipes Page -->
-  <ion-header-bar class="bar-positive" align-title="center">
-    <div style="text-align: center; margin-left: .2em;" ng-show="vm.user">
-      <i ng-show="!vm.user.photoURL" ui-sref="tabs.profile" class="icon ion-person avatar"/></i>
-      <img ng-show="vm.user.photoURL" ui-sref="tabs.profile" class="imgDName" ng-src="{{vm.user.photoURL}}">
-      <p class="avText">{{vm.displayName}}</p>
-    </div>
-    <h1 class="title">New Recipe</h1>
-  </ion-header-bar>
 
   <ion-content id="newRecipeComponent" class="has-header has-subheader">
     <!-- This is the new Recipes Form, where the user can input a new Recipe-->

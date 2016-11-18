@@ -7,7 +7,7 @@
       'ionic',
       'ngStorage'])
 
-//This is the configuaration for the entire 'app' module
+    //This is the configuaration for the entire 'app' module
     .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 
       $ionicConfigProvider.views.maxCache(0);
@@ -29,7 +29,8 @@
         .state(
           'tabs.login', {
             url: '/login',
-            template: '<login></login>'
+            template: '<login></login>',
+            displayName: 'Login'
           })
         /**
          *@kazeki1 Day 4, Thu- added this state to show recipe-detail page from my-recipes page
@@ -37,39 +38,48 @@
         .state(
           'tabs.recipeDetail', {
             url: '/recipeDetail',
-            template: '<recipe-detail></recipe-detail>'
+            template: '<recipe-detail></recipe-detail>',
+            displayName: 'Recipe Detail'
           })
         .state('tabs.browse', {
           url: '/browse',
-          template: '<browse></browse>'
+          template: '<browse></browse>',
+          displayName: 'Browse'
         })
         .state('tabs.browseApp', {
           url: '/browseApp',
-          template: '<browse-app></browse-app>'
+          template: '<browse-app></browse-app>',
+          displayName: 'Browse App'
         })
         .state('tabs.browseOnline', {
           url: '/browseOnline',
-          template: '<browse-online></browse-online>'
+          template: '<browse-online></browse-online>',
+          displayName: 'Browse Online'
         })
         .state('tabs.feedback', {
           url: '/feedback',
-          template: '<feedback></feedback>'
+          template: '<feedback></feedback>',
+          displayName: 'Feedback'
         })
         .state('tabs.home', {
           url: '/home',
-          template: '<home></home>'
+          template: '<home></home>',
+          displayName: 'Home'
         })
         .state('tabs.myRecipes', {
           url: '/myRecipes',
-          template: '<my-recipes></my-recipes>'
+          template: '<my-recipes></my-recipes>',
+          displayName: 'My Recipes'
         })
         .state('tabs.newRecipe', {
           url: '/newRecipe',
-          template: '<new-recipe></new-recipe>'
+          template: '<new-recipe></new-recipe>',
+          displayName: 'New recipe'
         })
         .state('tabs.profile', {
           url: '/profile',
-          template: '<profile></profile>'
+          template: '<profile></profile>',
+          displayName: 'Profile'
         })
     })
 

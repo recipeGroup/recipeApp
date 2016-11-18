@@ -32,26 +32,7 @@
        */
       vm.selectedRecipe = recipesService.getSelectedRecipe();
     }
-
-    userService.getProfile()
-               .then(
-                 function (successResponse) {
-                   vm.user = successResponse;
-                   var str = vm.user.email;
-                   if (vm.user.displayName == null) {
-                     var aNum;
-                     aNum = str.indexOf("@");
-                     vm.displayName = str.substr(0, aNum);
-                   }
-                   else {
-                     vm.displayName = vm.user.displayName;
-                   }
-
-                 },
-                 function (errorResponse) {
-
-                 }
-               );
+    
 
     /**
        *@tyeren creates function to add ingredients and call them thru out the app

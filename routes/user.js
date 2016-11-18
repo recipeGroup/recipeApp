@@ -25,43 +25,64 @@ router.post('/create', function (req, res, next) {
   })
 });
 
-//-------------------------------------------------------
 router.post('/login', function (req, res, next) {
-  }
-);
-https://scotch.io/tutorials/learn-to-use-the-new-router-in-expressjs-4
-
-// ROUTES
-// ==============================================
-  
-  app.route('/login')
-     // show the form (GET http://localhost:8080/login)
-     .get(
-       function (req, res) {
-         res.send('this is the login form');
-       }
-     )
-  
-     // process the form (POST http://localhost:8080/login)
-     .post(
-       function (req, res) {
-         console.log('processing');
-         res.send('processing the login form!');
-       }
-     );
-
-//-------------------------------------------------------
+  User.findOne({email: req.body.email}, function (err, user) {
+    if (err) {
+      res.status(400).send({error: err});
+    }
+    else if (user === null) {
+      res.status(400).send({error: 'This user does not exist'});
+    }
+    else if (user && user.password !== req.body.password){
+      res.status(400).send({error: 'password is incorrect try again'});
+    }
+    else if (user && user.password === req.body.password){
+        res.json(user);
+    }
+  })
+});
 
 router.post('/logout', function (req, res, next) {
 
 });
 
-router.get('/read', function (req, res, next) {
-
+router.get('/read/:userId', function (req, res, next) {
+  User.findById(req.params.userId, function (err, user) {
+    if (err) {
+      res.status(400).send({error: err});
+    }
+    else if (user === null) {
+      res.status(400).send({error: 'This user does not exist'});
+    }
+    else {
+      res.json(user);
+    }
+  })
 });
 
 router.post('/update', function (req, res, next) {
-
+  User.findById(req.body._id, function (err, user) {
+    if (err) {
+      res.status(400).send({error: err});
+    }
+    else if (user === null) {
+      res.status(400).send({error: 'This user does not exist'});
+    }
+    else {
+      for(property in req.body) {
+        user[property] = req.body[property];
+      }
+      user.save(function (err, updatedUser) {
+        if (err) {
+          res.status(400).send({error: err});
+        }
+        else {
+          res.json(updatedUser);
+        }
+        
+      })
+    }
+  })
 });
 
 module.exports = router;
