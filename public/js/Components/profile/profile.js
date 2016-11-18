@@ -35,7 +35,7 @@
        */
     function saveProfile (user) {
       userService.saveProfile(user);
-      toastService.showToast(user.displayName + 'profile saved!');
+      toastService.showToast(user.displayName + ' profile saved!');
     }
   }
 })();
