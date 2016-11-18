@@ -1,14 +1,13 @@
 //160928-recipeApp_Services_user_js
 (function () {
   angular.module('app')
-    .service('userService', function ($state, $rootScope, $q) {
+    .service('userService', function ($state, $rootScope, $q, $localStorage, $http) {
 
       var user;
       var registeredFunctions = [];
 
-      if (window.localStorage.getItem('firebase:authUser:AIzaSyDtNbp-weG3kHrkLuhl6f9Ymy5JMQ0F8W8:[DEFAULT]')) {
-        var userStorage = window.localStorage.getItem('firebase:authUser:AIzaSyDtNbp-weG3kHrkLuhl6f9Ymy5JMQ0F8W8:[DEFAULT]');
-        user = JSON.parse(userStorage);
+      if($localStorage.user) {
+        user = $localStorage.user;
       }
 
       this.getUser = getUser;
@@ -22,8 +21,18 @@
          */
       function getProfile() {
         var promise = $q.defer();
+
         if(user) {
-        
+          $http({
+            method: 'GET',
+            url: '/user/read/' + user._id
+          })
+            .then(function (success) {
+              setUser(success.data);
+              promise.resolve();
+            }, function (error) {
+              promise.reject(error.data.error);
+            });
         }
         return promise.promise;
       }
@@ -41,6 +50,19 @@
        * @param data
          */
       function saveProfile(data) {
+        var promise = $q.defer();
+        $http({
+          method: 'POST',
+          url: '/user/update',
+          data: data
+        })
+          .then(function(success) {
+            setUser(success.data);
+            promise.resolve();
+          }, function(error) {
+            promise.reject(error.data.error);
+          });
+        return promise.promise;
       }
 
       /**
@@ -49,6 +71,7 @@
          */
       function setUser(theUser) {
         user = theUser;
+        $localStorage.user = user;
         update(user);
       }
 
