@@ -1,16 +1,5 @@
 <!-- 160928-recipeApp_browse-online_html-->
 <ion-pane>
-  <!-- displays user avatar if they have one-->
-  <ion-header-bar class="bar-positive" align-title="center">
-    <div style="text-align: center; margin-left: .2em;" ng-show="vm.user">
-      <i ng-show="!vm.user.photoURL" ui-sref="tabs.profile" class="icon ion-person avatar"/></i>
-      <img ng-show="vm.user.photoURL" ui-sref="tabs.profile" class="imgDName" ng-src="{{vm.user.photoURL}}">
-      <!-- displays vm.displayName extracted from function onInit() in browseController -->
-      <p class="avText">{{vm.displayName}}</p>
-    </div>
-    <!-- displays Browse tab up top to access browse tab-->
-    <h1 class="title">Browse</h1>
-  </ion-header-bar>
   <!-- kazeki - Scenerio 1- Browse-Online clicked calls all recipes from API scraper showing spinner while array loads -->
     <ion-content ng-show="!vm.recipes" class="flex-row has-header has-subheader">
       <ion-spinner ></ion-spinner>

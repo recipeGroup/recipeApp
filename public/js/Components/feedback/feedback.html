@@ -1,13 +1,6 @@
 <!--160928-recipeApp_feedback_html-->
 <ion-pane>
-  <ion-header-bar class="bar-positive" align-title="center">
-    <div style="text-align: center; margin-left: .2em;" ng-show="vm.user">
-      <i ng-show="!vm.user.photoURL" ui-sref="tabs.profile" class="icon ion-person avatar"/></i>
-      <img ng-show="vm.user.photoURL" ui-sref="tabs.profile" class="imgDName" ng-src="{{vm.user.photoURL}}">
-      <p class="avText">{{vm.displayName}}</p>
-    </div>
-    <h1 class="title">Feedback</h1>
-  </ion-header-bar>
+
   <ion-content id="feedbackComponent" class="has-header has-subheader">
     <form name="newFeedbackForm" ng-submit="vm.saveFeedback(vm.feedback)">
     <div class="item list-item" style="text-align: center">
