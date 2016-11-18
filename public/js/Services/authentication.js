@@ -36,9 +36,10 @@
           data: record
               })
           .then(function(success) {
-                        console.log(success);
+            userService.setUser(success.data);
+            promise.resolve();
           }, function(error) {
-                      console.log(error);
+              promise.reject(error.data.error);
           });
         
         return promise.promise;
@@ -54,10 +55,21 @@
        * @param password
          * @returns {Promise}
          */
-      function login(provider, email, password) {
+      function login( email, password) {
         
-
         var promise = $q.defer();
+
+        $http({
+          method: 'POST',
+          url: '/user/login',
+          data: {email: email, password: password}
+        })
+          .then(function(success) {
+            userService.setUser(success.data);
+            promise.resolve();
+          }, function(error) {
+            promise.reject(error.data.error);
+          });
         
         return promise.promise;
       }
