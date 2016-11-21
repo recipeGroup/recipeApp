@@ -28,8 +28,7 @@
             url: '/user/read/' + user._id
           })
             .then(function (success) {
-              setUser(success.data);
-              promise.resolve();
+              promise.resolve(success.data);
             }, function (error) {
               promise.reject(error.data.error);
             });
