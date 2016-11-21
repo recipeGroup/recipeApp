@@ -28,6 +28,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/user', user);
+app.use('/recipe', recipe);
+app.use('/feedback', feedback);
 
 // catch 404 and forward to error handler
 app.use(

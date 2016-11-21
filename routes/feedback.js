@@ -6,3 +6,5 @@ router.post('/create', function (req, res, next) {
 
 });
 
+module.exports = router;
+

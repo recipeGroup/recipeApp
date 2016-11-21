@@ -1,51 +1,19 @@
 //160928-recipeApp_Services_recipes_js
 (function () {
   angular.module('app')
-    .service('recipesService', function (  $q) {
+    .service('recipesService', function ( $http, $q) {
 
       //Declaring Variables for use in the service
       var selectedRecipe;
 
       //Declaring functions for use in the Controller
-      this.addIngredient = addIngredient;
-      this.deleteIngredient = deleteIngredient;
-      this.editRecipe = editRecipe;
-      this.getAppRecipes = getAppRecipes;
-      this.getRecipes = getRecipes;
+      this.updateRecipe = updateRecipe;
+      this.readPublicRecipes = readPublicRecipes;
+      this.readUserRecipes = readUserRecipes;
       this.getSelectedRecipe = getSelectedRecipe;
-      this.saveRecipe = saveRecipe;
+      this.createRecipe = createRecipe;
       this.setSelectedRecipe = setSelectedRecipe;
       this.deleteRecipe = deleteRecipe;
-
-
-      //Functions for use in the Service
-      /**
-       * @loghen41 addIngredient() recipes a recipe, and adds an ingredient to it in the database
-       * @param recipeObject
-       * @returns {Promise}
-         */
-      function addIngredient(recipeObject) {
-        var promise = $q.defer();
-
-        var newIngredient = {
-          name: '',
-          quantity: ''
-        };
-        
-        return promise.promise;
-      }
-
-        /**
-         * @loghen41 deleteIngredient() deletes an ingredient in the database
-         * @param recipeObject
-         * @param index
-         * @returns {Promise}
-         */
-      function deleteIngredient(recipeObject, index) {
-        var promise = $q.defer();
-
-        return promise.promise;
-      }
 
       function deleteRecipe(recipe) {
         var promise = $q.defer();
@@ -53,12 +21,8 @@
         return promise.promise;
       }
 
-      /**
-       * @loghen41 editRecipe() allows the user to edit a previously created recipe
-       * @param recipe
-       * @returns {Promise}
-       */
-      function editRecipe(recipe) {
+
+      function updateRecipe(recipe) {
         //$q makes a promise object that waits for a resolve, or a reject
         var promise = $q.defer();
 
@@ -73,17 +37,14 @@
 
       }
 
-      /**
-       * getAppRecipes() gets all of the public recipes built by the App
-       * @returns {Promise}
-         */
-      function getAppRecipes() {
+
+      function readPublicRecipes() {
         var promise = $q.defer();
         
         return promise.promise;
       }
 
-      function getRecipes(userId) {
+      function readUserRecipes(userId) {
         var promise = $q.defer();
        
         return promise.promise;
@@ -99,22 +60,23 @@
       }
       
 
-      /**
-       * @loghen41 saveRecipe() allows the user to save a brand new recipe
-       * @param user
-       * @param recipe
-       */
-      function saveRecipe(user, recipe) {
+      function createRecipe(recipe) {
         var promise = $q.defer();
-
-        //var record is a local object that we are preparing to send to firebase, this is only done to take out the ingredients, and add in the user, and public variables
-        var record = {
-          title: recipe.title,
-          directions: recipe.directions,
-          status: recipe.status,
-          user: user.uid
-        };
-        
+        $http(
+          {
+            method: 'POST',
+            url: '/recipe/create',
+            data: recipe
+          }
+        )
+          .then(
+            function (success) {
+              setSelectedRecipe(success.data);
+              promise.resolve();
+            }, function (error) {
+              promise.reject(error.data.error);
+            }
+          );
         return promise.promise;
       }
 
@@ -127,3 +89,4 @@
       }
     })
 })();
+
