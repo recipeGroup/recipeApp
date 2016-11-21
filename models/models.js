@@ -1,4 +1,6 @@
 var mongoose =require('mongoose');
+//var connectionString - process.env.MONGODB_URI || 'mongodb://localhost
+// process.env env is envronmental var
 var Schema = mongoose.Schema,
   ObjectId = Schema.ObjectId;
 
