@@ -64,7 +64,6 @@
      */
     function onInit() {
       theUser = userService.getUser();
-     
   }
 
 
@@ -74,9 +73,9 @@
      * @param recipe
      */
     function saveRecipe(recipe) {
-
+      recipe.user = theUser.email;
       //we pass the recipe object to the recipesService to store the recipe on the database
-      recipesService.saveRecipe(theUser, recipe)
+      recipesService.createRecipe(recipe)
         .then(
           function() {
             //We show a toast to the user that displays that the recipe has been created
