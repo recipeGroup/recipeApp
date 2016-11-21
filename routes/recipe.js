@@ -3,7 +3,16 @@ var router = express.Router();
 var Recipe = require('../models/models.js').Recipe;
 
 router.post('/create', function (req, res, next) {
-
+  Recipe.create(
+    req.body, function (theerr, therecipe) {
+      if (theerr) {
+        res.status(400).send({error: theerr});
+      }
+      else {
+        res.json(therecipe);
+      }
+    }
+  )
 });
 
 router.post('/delete', function (req, res, next) {
