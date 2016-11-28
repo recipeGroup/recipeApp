@@ -25,7 +25,7 @@
     function saveFeedback(feedback) {
       $http({
         method: 'POST',
-        url: '/feedback/add',
+        url: '/feedback/create',
         data: feedback
       })
         .then(
