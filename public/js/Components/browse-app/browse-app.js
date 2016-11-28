@@ -8,7 +8,7 @@
         controller: browseAppController,
         controllerAs: 'vm'
       });
-    function browseAppController(recipesService, userService) {
+    function browseAppController(recipesService, userService, toastService) {
       var vm = this;
       vm.goBack = goBack;
       vm.$onInit = onInit;
@@ -26,13 +26,13 @@
         /**
          * kazeki - onInit evokes recipesService for recipes
          */
-        recipesService.getAppRecipes()
+        recipesService.readPublicRecipes()
           .then(
             function (successResponse) {
               vm.appRecipes = successResponse;
             },
             function (errorResponse) {
-              console.log(errorResponse);
+              toastService.showToast(errorResponse);
             });
          }
   
