@@ -7,17 +7,15 @@
         controller: feedbackController,
         controllerAs: 'vm'
       });
-  function feedbackController( toastService, $state, userService) {
+  function feedbackController(toastService, $http) {
     //Local variables
     var vm = this;
     //Public variables
     vm.$onInit = onInit;
     vm.saveFeedback = saveFeedback;
-    /**
-       * @tyeren gets user profile/ID to display users email or profile name
-     */
+
     function onInit() {
-    
+
     }
 
     /**
@@ -25,11 +23,18 @@
      * @param feedback
        */
     function saveFeedback(feedback) {
-      if (!feedback.rating) {
-        toastService.showToast('Please Select A rating for our App!');
-      }
-      else {
-      }
+      $http({
+        method: 'POST',
+        url: '/feedback/add',
+        data: feedback
+      })
+        .then(
+          function () {
+            toastService.showToast('Feedback Submitted!');
+          },
+          function (errorResponse) {
+            toastService.showToast(errorResponse.data.error);
+          });
     }
   }
 
