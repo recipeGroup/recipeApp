@@ -8,7 +8,7 @@ router.post('/create', function (req, res, next) {
       res.status(404).send({ error: err });
     }
     else {
-      res.json(feedback);
+      res.send(feedback);
     }
   });
 });
