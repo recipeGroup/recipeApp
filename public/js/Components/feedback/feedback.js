@@ -31,6 +31,7 @@
         .then(
           function () {
             toastService.showToast('Feedback Submitted!');
+            vm.feedback = {};
           },
           function (errorResponse) {
             toastService.showToast(errorResponse.data.error);
