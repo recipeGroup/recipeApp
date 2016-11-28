@@ -28,7 +28,7 @@ var user = new Schema({
 
 var feedback = new Schema ({
   id: ObjectId,
-  rating: String,
+  rating: Number,
   text: String
 });
 
