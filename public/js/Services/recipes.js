@@ -17,22 +17,44 @@
 
       function deleteRecipe(recipe) {
         var promise = $q.defer();
-       
+        $http(
+          {
+            method: 'POST',
+            url: '/recipe/delete',
+            data: recipe
+          }
+        )
+          .then(
+            function (successResponse) {
+              promise.resolve(successResponse.data);
+            },
+            function (errorResponse) {
+              promise.reject(errorResponse.data.error);
+      
+            }
+          );
         return promise.promise;
       }
 
 
       function updateRecipe(recipe) {
-        //$q makes a promise object that waits for a resolve, or a reject
         var promise = $q.defer();
-
-        //var record is a local object that has been prepared to make an update to the database
-        var record = {
-          title: recipe.title,
-          directions: recipe.directions,
-          status: recipe.status
-        };
-        
+        $http(
+          {
+            method: 'POST',
+            url: '/recipe/update',
+            data: recipe
+          }
+        )
+          .then(
+            function (successResponse) {
+              promise.resolve(successResponse.data);
+            },
+            function (errorResponse) {
+              promise.reject(errorResponse.data.error);
+      
+            }
+          );
         return promise.promise;
 
       }
@@ -40,21 +62,46 @@
 
       function readPublicRecipes() {
         var promise = $q.defer();
-        
+        $http(
+          {
+            method: 'GET',
+            url: '/recipe/public'
+          }
+        )
+          .then(
+            function (successResponse) {
+              promise.resolve(successResponse.data);
+            },
+            function (errorResponse) {
+              promise.reject(errorResponse.data.error);
+      
+            }
+          );
         return promise.promise;
       }
 
       function readUserRecipes(userId) {
         var promise = $q.defer();
+        $http(
+          {
+            method: 'GET',
+            url: '/recipe/read/' + userId
+          }
+        )
+          .then(
+            function (successResponse) {
+                  promise.resolve(successResponse.data);
+            },
+            function (errorResponse) {
+                  promise.reject(errorResponse.data.error);
+              
+            }
+          );
        
         return promise.promise;
       }
-
-
-      /**
-       * @loghen41 allows the controller to get the selectedRecipe variable in the service
-       * @returns {*}
-       */
+      
+      ////////////
       function getSelectedRecipe() {
         return selectedRecipe;
       }
@@ -71,22 +118,18 @@
         )
           .then(
             function (success) {
-              setSelectedRecipe(success.data);
-              promise.resolve();
+              promise.resolve(success.data);
             }, function (error) {
               promise.reject(error.data.error);
             }
           );
         return promise.promise;
       }
-
-      /**
-       * @loghen41 allows a controller to set the selectedRecipe variable in the service for other controllers to see
-       * @param recipe
-       */
+      
       function setSelectedRecipe(recipe) {
         selectedRecipe = recipe;
       }
+      //////////////
     })
 })();
 

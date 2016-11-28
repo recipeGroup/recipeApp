@@ -33,37 +33,17 @@
       vm.selectedRecipe = recipesService.getSelectedRecipe();
     }
     
-
-    /**
-       *@tyeren creates function to add ingredients and call them thru out the app
-     */
+    
     function addLine() {
-      recipesService.addIngredient(vm.selectedRecipe)
-        .then(
-          function (successResponse) {
-            vm.selectedRecipe.ingredients = successResponse;
-          },
-          function (errorResponse) {
-            console.log(errorResponse);
-          }
-        );
-
+                 vm.selectedRecipe.ingredients.push({
+                    name: '',
+                     quantity: ''
+                                                    });
+                 
     }
-
-    /**
-     * @tyeren creates the ability to delete an ingridient line from firebase
-     * @param index
-       */
+    
     function deleteLine(index) {
-      recipesService.deleteIngredient(vm.selectedRecipe, index)
-        .then(
-          function (successResponse) {
-            vm.selectedRecipe.ingredients = successResponse;
-          },
-          function (errorResponse) {
-            console.log(errorResponse);
-          }
-        );
+         vm.selectedRecipe.ingredients.splice(index, 1);
     }
 
     /**
@@ -75,7 +55,7 @@
         .then(
           function (successResponse) {
             $state.go('tabs.myRecipes');
-            toastService.showToast('Recipe Deleted');
+            toastService.showToast(successResponse);
           },
           function (errorResponse) {
             console.log(errorResponse)
@@ -95,10 +75,10 @@
      * @param recipe
        */
     function saveRecipe(recipe) {
-      recipesService.editRecipe(recipe)
+      recipesService.updateRecipe(recipe)
                     .then(
                       function (successResponse) {
-                        vm.selectedRecipe.ingredients = successResponse;
+                        vm.selectedRecipe = successResponse;
                         toastService.showToast('Changes to ' + vm.selectedRecipe.title + ' saved!');
                       },
                       function () {

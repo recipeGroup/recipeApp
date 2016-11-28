@@ -77,18 +77,17 @@
       //we pass the recipe object to the recipesService to store the recipe on the database
       recipesService.createRecipe(recipe)
         .then(
-          function() {
+          function(successResponse) {
             //We show a toast to the user that displays that the recipe has been created
-            toastService.showToast(vm.recipe.title + ' created!');
+            toastService.showToast(successResponse.title + ' created!');
 
             //We reset the recipe Object to prepare it for a new recipe
             vm.recipe = {};
             vm.recipe.status = 'Public';
           },
-          function() {});
-
-
-
+          function(errorResponse) {
+            toastService.showToast(errorResponse);
+          });
     }
 
   }
