@@ -30,7 +30,7 @@
             },
             function (errorResponse) {
               promise.reject(errorResponse.data.error);
-      
+
             }
           );
         return promise.promise;
@@ -52,7 +52,7 @@
             },
             function (errorResponse) {
               promise.reject(errorResponse.data.error);
-      
+
             }
           );
         return promise.promise;
@@ -65,7 +65,7 @@
         $http(
           {
             method: 'GET',
-            url: '/recipe/public'
+            url: '/recipe/read/public'
           }
         )
           .then(
@@ -74,7 +74,7 @@
             },
             function (errorResponse) {
               promise.reject(errorResponse.data.error);
-      
+
             }
           );
         return promise.promise;
@@ -94,18 +94,18 @@
             },
             function (errorResponse) {
                   promise.reject(errorResponse.data.error);
-              
+
             }
           );
-       
+
         return promise.promise;
       }
-      
-      ////////////
+
+
       function getSelectedRecipe() {
         return selectedRecipe;
       }
-      
+
 
       function createRecipe(recipe) {
         var promise = $q.defer();
@@ -125,11 +125,11 @@
           );
         return promise.promise;
       }
-      
+
       function setSelectedRecipe(recipe) {
         selectedRecipe = recipe;
       }
-      //////////////
+
     })
 })();
 
