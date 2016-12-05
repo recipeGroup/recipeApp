@@ -20,7 +20,7 @@
         $http(
           {
             method: 'POST',
-            url: '/recipe/delete',
+            url: 'recipevil.westus2.cloudapp.azure.com:3000/recipe/delete',
             data: recipe
           }
         )
@@ -42,7 +42,7 @@
         $http(
           {
             method: 'POST',
-            url: '/recipe/update',
+            url: 'recipevil.westus2.cloudapp.azure.com:3000/recipe/update',
             data: recipe
           }
         )
@@ -65,7 +65,7 @@
         $http(
           {
             method: 'GET',
-            url: '/recipe/read/public'
+            url: 'recipevil.westus2.cloudapp.azure.com:3000/recipe/read/public'
           }
         )
           .then(
@@ -85,7 +85,7 @@
         $http(
           {
             method: 'GET',
-            url: '/recipe/read/' + userId
+            url: 'recipevil.westus2.cloudapp.azure.com:3000/recipe/read/' + userId
           }
         )
           .then(
@@ -112,7 +112,7 @@
         $http(
           {
             method: 'POST',
-            url: '/recipe/create',
+            url: 'recipevil.westus2.cloudapp.azure.com:3000/recipe/create',
             data: recipe
           }
         )

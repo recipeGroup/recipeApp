@@ -25,7 +25,7 @@
         if(user) {
           $http({
             method: 'GET',
-            url: '/user/read/' + user._id
+            url: 'recipevil.westus2.cloudapp.azure.com:3000/user/read/' + user._id
           })
             .then(function (success) {
               promise.resolve(success.data);
@@ -52,7 +52,7 @@
         var promise = $q.defer();
         $http({
           method: 'POST',
-          url: '/user/update',
+          url: 'recipevil.westus2.cloudapp.azure.com:3000/user/update',
           data: data
         })
           .then(function(success) {

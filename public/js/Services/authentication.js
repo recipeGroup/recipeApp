@@ -16,7 +16,7 @@
          * @returns {Promise}
          */
       function createUserFromEmail(email, password) {
-        
+
         var promise = $q.defer();
 
         var record = {
@@ -28,11 +28,11 @@
           password: password,
           gender: 'Other'
         };
-        
-        
+
+
         $http({
           method: 'POST',
-          url: '/user/create',
+          url: 'recipevil.westus2.cloudapp.azure.com:3000/user/create',
           data: record
               })
           .then(function(success) {
@@ -41,7 +41,7 @@
           }, function(error) {
               promise.reject(error.data.error);
           });
-        
+
         return promise.promise;
 
       }
@@ -56,12 +56,12 @@
          * @returns {Promise}
          */
       function login( email, password) {
-        
+
         var promise = $q.defer();
 
         $http({
           method: 'POST',
-          url: '/user/login',
+          url: 'recipevil.westus2.cloudapp.azure.com:3000/user/login',
           data: {email: email, password: password}
         })
           .then(function(success) {
@@ -70,7 +70,7 @@
           }, function(error) {
             promise.reject(error.data.error);
           });
-        
+
         return promise.promise;
       }
 
@@ -85,6 +85,6 @@
 
         return user;
       }
-      
+
     });
 })();
