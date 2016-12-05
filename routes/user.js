@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/models.js').User;
+var FacebookStrategy = require('passport-facebook').Strategy;
+var User = require('../models/models.js').User;
 
 
 passport.use(new FacebookStrategy({
