@@ -3,9 +3,10 @@
   angular.module('app')
     .service('authenticationService', function ($sessionStorage, $localStorage,  $q, $state, userService, $http) {
 
+      this.createUserFromEmail = createUserFromEmail;
       this.login = login;
       this.logout = logout;
-      this.createUserFromEmail = createUserFromEmail;
+      this.oAuthLogin = oAuthLogin;
 
       //Awesome Change
       /**
@@ -86,6 +87,26 @@
 
         return user;
       }
+
+      function oAuthLogin(provider) {
+        var promise = $q.defer();
+
+        $http({
+          method: 'GET',
+          url: 'recipevil.westus2.cloudapp.azure.com:3000/user/auth/' + provider
+        })
+          .then(function(success) {
+            console.log(success);
+            userService.setUser(success.data);
+            promise.resolve();
+          }, function(error) {
+            console.log(error);
+            promise.reject(error.data.error);
+          });
+
+        return promise.promise;
+      }
+
 
     });
 })();

@@ -16,6 +16,7 @@
     vm.createEmailLogin = createEmailLogin;
     vm.login = login;
     vm.logout = logout;
+    vm.oAuthLogin = oAuthLogin;
     vm.showCreateEmailForm = showCreateEmailForm;
     vm.showEmailForm = showEmailForm;
 
@@ -105,12 +106,21 @@
       delete vm.user;
     }
 
+    function oAuthLogin (provider) {
+      authenticationService.oAuthLogin(provider)
+        .then(
+          function(successResponse) {
+            vm.user = successResponse
+          },
+          function(errorResponse) {
+            toastService.showToast(errorResponse);
+          });
+    }
     /**
      * @loghen41 onInit() is called once the controller is loaded, and calls authenticationService.initialCheck() to see if the user exists and route the page accordingly
      */
     function onInit() {
       vm.user = userService.getUser();
-
     }
 
     /**

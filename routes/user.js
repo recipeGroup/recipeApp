@@ -1,6 +1,30 @@
 var express = require('express');
 var router = express.Router();
+var passport = require('passport');
+var FacebookStrategy = require('passport-facebook').Strategy;
 var User = require('../models/models.js').User;
+
+passport.use(new FacebookStrategy({
+    clientID: 1036813176414179,
+    clientSecret: 'f4ff44c9a8187cfbcb76c853739f31e5',
+    callbackURL: "http://recipevil.westus2.cloudapp.azure.com:3000/#/tabs/login/auth/facebook/callback"
+  },
+  function (accessToken, refreshToken, profile, done) {
+    console.log(accessToken);
+    console.log(refreshToken);
+    console.log(profile);
+    console.log(done);
+    User.findOne(
+      {email: req.body.email}, function (err, user) {
+        if (err) {
+          return done(err)
+        }
+      else {
+          done(null, user);
+        }
+      });
+  }
+));
 
 router.post(
   '/create', function (req, res, next) {
@@ -29,6 +53,7 @@ router.post(
   }
 );
 
+
 router.post(
   '/login', function (req, res, next) {
     User.findOne(
@@ -50,9 +75,14 @@ router.post(
   }
 );
 
+router.get('/auth/facebook', passport.authenticate('facebook'));
+
+router.get('auth/facebook/callback',
+  passport.authenticate('facebook',{successRedirect: '/home', failureRedirect: '/login'}));
+
 router.post(
   '/logout', function (req, res, next) {
-    
+
   }
 );
 
@@ -96,7 +126,7 @@ router.post(
               else {
                 res.json(updatedUser);
               }
-              
+
             }
           )
         }
