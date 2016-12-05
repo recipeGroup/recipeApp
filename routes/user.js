@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var User = require('../models/models.js').User;
 
@@ -73,6 +74,11 @@ router.post(
     )
   }
 );
+
+router.get('/auth/facebook', passport.authenticate('facebook'));
+
+router.get('auth/facebook/callback',
+  passport.authenticate('facebook',{successRedirect: '/home', failureRedirect: '/login'}));
 
 router.post(
   '/logout', function (req, res, next) {
