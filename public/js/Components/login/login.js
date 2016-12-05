@@ -1,13 +1,13 @@
 (function () {
   angular.module('app')
-         .component(
-           'login', {
-             bindings: {},
-             templateUrl: 'js/Components/login/login.html',
-             controller: loginController,
-             controllerAs: 'vm'
-           }
-         );
+    .component(
+      'login', {
+        bindings: {},
+        templateUrl: 'js/Components/login/login.html',
+        controller: loginController,
+        controllerAs: 'vm'
+      }
+    );
   function loginController(authenticationService, toastService, $state, userService) {
 //Local variables
     var vm = this;
@@ -16,6 +16,7 @@
     vm.createEmailLogin = createEmailLogin;
     vm.login = login;
     vm.logout = logout;
+    vm.oAuthLogin = oAuthLogin;
     vm.showCreateEmailForm = showCreateEmailForm;
     vm.showEmailForm = showEmailForm;
 
@@ -33,21 +34,21 @@
       }
       else {
         authenticationService.createUserFromEmail(email, password1)
-                             .then(
-                               function () {
-                                 vm.user = userService.getUser();
-                                 if (vm.user.displayName) {
-                                   toastService.showToast(vm.user.displayName + " Logged In!");
-                                 }
-                                 else {
-                                   toastService.showToast(vm.user.email + " logged in!");
-                                 }
-                                 $state.go('tabs.home');
-                               }, function (error) {
-                                 toastService.showToast(error);
+          .then(
+            function () {
+              vm.user = userService.getUser();
+              if (vm.user.displayName) {
+                toastService.showToast(vm.user.displayName + " Logged In!");
+              }
+              else {
+                toastService.showToast(vm.user.email + " logged in!");
+              }
+              $state.go('tabs.home');
+            }, function (error) {
+              toastService.showToast(error);
 
-                               }
-                             )
+            }
+          )
       }
     }
 
@@ -73,21 +74,21 @@
       }
 
       authenticationService.login(email, password)
-                           .then(
-                             function () {
-                               vm.user = userService.getUser();
-                               if (vm.user.displayName) {
-                                 toastService.showToast(vm.user.displayName + " Logged In!");
-                               }
-                               else {
-                                 toastService.showToast(vm.user.email + " Logged in!");
-                               }
-                               $state.go('tabs.home');
-                             },
-                             function (error) {
-                               toastService.showToast(error)
-                             }
-                           )
+        .then(
+          function () {
+            vm.user = userService.getUser();
+            if (vm.user.displayName) {
+              toastService.showToast(vm.user.displayName + " Logged In!");
+            }
+            else {
+              toastService.showToast(vm.user.email + " Logged in!");
+            }
+            $state.go('tabs.home');
+          },
+          function (error) {
+            toastService.showToast(error)
+          }
+        )
     }
 
     /**
@@ -105,12 +106,21 @@
       delete vm.user;
     }
 
+    function oAuthLogin (provider) {
+      authenticationService.oAuthLogin(provider)
+        .then(
+          function(successResponse) {
+            vm.user = successResponse
+          },
+          function(errorResponse) {
+            toastService.showToast(errorResponse);
+          });
+    }
     /**
      * @loghen41 onInit() is called once the controller is loaded, and calls authenticationService.initialCheck() to see if the user exists and route the page accordingly
      */
     function onInit() {
       vm.user = userService.getUser();
-
     }
 
     /**
