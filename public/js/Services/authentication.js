@@ -33,7 +33,7 @@
 
         $http({
           method: 'POST',
-          url: '/user/create',
+          url: 'recipevil.westus2.cloudapp.azure.com:3000/user/create',
           data: record
               })
           .then(function(success) {
@@ -62,7 +62,7 @@
 
         $http({
           method: 'POST',
-          url: '/user/login',
+          url: 'recipevil.westus2.cloudapp.azure.com:3000/user/login',
           data: {email: email, password: password}
         })
           .then(function(success) {
@@ -89,11 +89,10 @@
 
       function oAuthLogin(provider) {
         var promise = $q.defer();
-        console.log('user/auth/' + provider);
 
         $http({
           method: 'GET',
-          url: '/user/auth/' + provider
+          url: 'recipevil.westus2.cloudapp.azure.com:3000/user/auth/' + provider
         })
           .then(function(success) {
             console.log(success);
