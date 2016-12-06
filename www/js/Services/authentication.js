@@ -7,7 +7,6 @@
       this.login = login;
       this.logout = logout;
       this.oAuthLogin = oAuthLogin;
-
       
       /**
        * @loghen41 createUserFromEmail() creates a user in firebase based on the email and password given to it
